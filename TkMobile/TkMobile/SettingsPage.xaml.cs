@@ -34,7 +34,7 @@ namespace TkMobile
         private async void TestButton_Clicked(object sender, EventArgs e)
         {
             TestButton.IsEnabled = false;
-            string connectionString = tklib.TkSettings.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
+            string connectionString = tklib.TkDatabase.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
             try
             {
                 var connection = new NpgsqlConnection(connectionString);
@@ -60,7 +60,7 @@ namespace TkMobile
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            tklib.TkSettings.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
+            tklib.TkDatabase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
 
             Preferences.Set("IpHostname", IpEntry.Text);
             Preferences.Set("Database", DbEntry.Text);
