@@ -41,7 +41,7 @@ namespace TkMobile
                 await connection.OpenAsync();
                 if (connection.State == System.Data.ConnectionState.Open)
                 {
-                    FeedbackLabel.Text = "Connection succesfull";
+                    FeedbackLabel.Text = "Connection successful";
                 }
                 connection.Dispose();
             }
@@ -50,7 +50,7 @@ namespace TkMobile
                 FeedbackLabel.Text = exc.MessageText;
             }
 
-            catch(TimeoutException exc)
+            catch(TimeoutException)
             {
                 FeedbackLabel.Text = "Connection timed out";
             }
