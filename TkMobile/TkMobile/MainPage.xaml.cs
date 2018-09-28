@@ -23,11 +23,11 @@ namespace TkMobile
         private void LocomotiveButton_Click(object sender,EventArgs e)
         {
             if (Preferences.Get("TileLayout", false)) {
-                Navigation.PushModalAsync(new ItemOverviews.LocomotiveOverviewTile());
+                Navigation.PushAsync(new ItemOverviews.LocomotiveOverviewTile());
             }
             else
             {
-                Navigation.PushModalAsync(new ItemOverviews.LocomotiveOverviewList());
+                Navigation.PushAsync(new ItemOverviews.LocomotiveOverviewList());
             }
         }
     }
