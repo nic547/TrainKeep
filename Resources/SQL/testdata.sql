@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.5
--- Dumped by pg_dump version 10.5
+-- Dumped from database version 10.3
+-- Dumped by pg_dump version 10.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,159 +19,193 @@ SET row_security = off;
 -- Data for Name: coupler; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.coupler (id, name) VALUES (1, 'Märklin Kurzkupplung');
-INSERT INTO public.coupler (id, name) VALUES (2, 'Roco Univarsal');
-INSERT INTO public.coupler (id, name) VALUES (3, 'ESU');
+COPY public.coupler (id, name) FROM stdin;
+1	Märklin Kurzkupplung
+2	Roco Univarsal
+3	ESU
+\.
 
 
 --
 -- Data for Name: manufacturer; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.manufacturer (id, name) VALUES (1, 'Märklin');
-INSERT INTO public.manufacturer (id, name) VALUES (2, 'Roco');
-INSERT INTO public.manufacturer (id, name) VALUES (3, 'Piko');
-INSERT INTO public.manufacturer (id, name) VALUES (4, 'Liliput');
-INSERT INTO public.manufacturer (id, name) VALUES (5, 'LS Models');
-INSERT INTO public.manufacturer (id, name) VALUES (6, 'Lux');
+COPY public.manufacturer (id, name) FROM stdin;
+1	Märklin
+2	Roco
+3	Piko
+4	Liliput
+5	LS Models
+6	Lux
+\.
 
 
 --
 -- Data for Name: proto_coupler; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.proto_coupler (id, name) VALUES (1, 'UIC');
-INSERT INTO public.proto_coupler (id, name) VALUES (2, 'Schwab');
-INSERT INTO public.proto_coupler (id, name) VALUES (3, 'Scharfenberg');
-INSERT INTO public.proto_coupler (id, name) VALUES (4, 'GF-Sécheron');
+COPY public.proto_coupler (id, name) FROM stdin;
+1	UIC
+2	Schwab
+3	Scharfenberg
+4	GF-Sécheron
+\.
 
 
 --
 -- Data for Name: proto_manufacturer; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.proto_manufacturer (id, name) VALUES (1, 'Siemens');
-INSERT INTO public.proto_manufacturer (id, name) VALUES (2, 'Stadler Rail');
-INSERT INTO public.proto_manufacturer (id, name) VALUES (3, 'SLM');
-INSERT INTO public.proto_manufacturer (id, name) VALUES (4, 'Bombardier Transporation');
+COPY public.proto_manufacturer (id, name) FROM stdin;
+1	Siemens
+2	Stadler Rail
+3	SLM
+4	Bombardier Transporation
+\.
 
 
 --
 -- Data for Name: proto_class; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (1, 'Re 460', 'locomotive', NULL, NULL, NULL, 1, 3, NULL, 200);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (2, 'ES64F4', 'locomotive', NULL, NULL, NULL, 1, 1, NULL, 140);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (4, 'Rilns', 'waggon', NULL, NULL, NULL, 1, NULL, NULL, 100);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (3, 'TRAXX AC3 F140', 'locomotive', NULL, NULL, NULL, 1, 4, NULL, 140);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (6, 'Habbiillns ', 'waggon', NULL, NULL, NULL, 1, NULL, NULL, 100);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (5, 'Hbbillns', 'waggon', NULL, NULL, NULL, 1, NULL, NULL, 100);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (7, 'Shimmns', 'waggon', NULL, NULL, NULL, 1, NULL, NULL, 100);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (8, 'Fas', 'waggon', NULL, NULL, NULL, NULL, NULL, NULL, 100);
-INSERT INTO public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) VALUES (9, 'Habbiillnss', 'waggon', NULL, NULL, NULL, NULL, NULL, NULL, 120);
+COPY public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) FROM stdin;
+1	Re 460	locomotive	\N	\N	\N	1	3	\N	200
+2	ES64F4	locomotive	\N	\N	\N	1	1	\N	140
+4	Rilns	waggon	\N	\N	\N	1	\N	\N	100
+3	TRAXX AC3 F140	locomotive	\N	\N	\N	1	4	\N	140
+6	Habbiillns 	waggon	\N	\N	\N	1	\N	\N	100
+5	Hbbillns	waggon	\N	\N	\N	1	\N	\N	100
+7	Shimmns	waggon	\N	\N	\N	1	\N	\N	100
+8	Fas	waggon	\N	\N	\N	\N	\N	\N	100
+9	Habbiillnss	waggon	\N	\N	\N	\N	\N	\N	120
+\.
 
 
 --
 -- Data for Name: proto_rw_company; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.proto_rw_company (id, name) VALUES (1, 'SBB');
-INSERT INTO public.proto_rw_company (id, name) VALUES (2, 'BLS');
-INSERT INTO public.proto_rw_company (id, name) VALUES (3, 'SBB Personenverkehr');
-INSERT INTO public.proto_rw_company (id, name) VALUES (4, 'SBB Cargo');
-INSERT INTO public.proto_rw_company (id, name) VALUES (5, 'SBB Infra');
-INSERT INTO public.proto_rw_company (id, name) VALUES (6, 'BLS Cargo');
-INSERT INTO public.proto_rw_company (id, name) VALUES (7, 'Railpool');
-INSERT INTO public.proto_rw_company (id, name) VALUES (8, 'SBB Cargo International');
-INSERT INTO public.proto_rw_company (id, name) VALUES (9, 'MRCE');
-INSERT INTO public.proto_rw_company (id, name) VALUES (10, 'Swiss Rail Traffic');
-INSERT INTO public.proto_rw_company (id, name) VALUES (11, 'Railcare');
-INSERT INTO public.proto_rw_company (id, name) VALUES (12, 'DB');
-INSERT INTO public.proto_rw_company (id, name) VALUES (13, 'DB Cargo');
-INSERT INTO public.proto_rw_company (id, name) VALUES (14, 'AAE');
-INSERT INTO public.proto_rw_company (id, name) VALUES (15, 'Wascosa');
-INSERT INTO public.proto_rw_company (id, name) VALUES (16, 'Die Schweizerische Post');
+COPY public.proto_rw_company (id, name) FROM stdin;
+1	SBB
+2	BLS
+3	SBB Personenverkehr
+4	SBB Cargo
+5	SBB Infra
+6	BLS Cargo
+7	Railpool
+8	SBB Cargo International
+9	MRCE
+10	Swiss Rail Traffic
+11	Railcare
+12	DB
+13	DB Cargo
+14	AAE
+15	Wascosa
+16	Die Schweizerische Post
+\.
 
 
 --
 -- Data for Name: model_item; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (1, 'Re 460 Helvetia', NULL, NULL, NULL, 1, '39460', 1, NULL, 3, 3, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (2, 'SBB Re 474', NULL, NULL, NULL, 1, NULL, 2, NULL, 4, 8, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (3, 'BR 189', NULL, NULL, NULL, 1, NULL, 2, NULL, 13, 13, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (4, 'SBBCI BR 189', NULL, NULL, NULL, 1, NULL, 2, NULL, 9, 8, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (6, 'BLS BR 187', NULL, NULL, NULL, 1, NULL, 3, NULL, 7, 6, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (5, 'Rem 487 001', NULL, NULL, NULL, 1, NULL, 3, NULL, 10, 10, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (7, 'Schiebeplanenwagen', NULL, NULL, NULL, 1, '47061', 4, NULL, 14, 4, NULL);
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (8, 'Schiebeplanenwagen', NULL, NULL, NULL, 1, NULL, 4, NULL, 4, 4, NULL);
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (9, 'Schiebewandwagen', NULL, NULL, NULL, 1, '48025', 5, NULL, 4, 4, 'v');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (10, 'Schiebewandwagen', NULL, NULL, NULL, 1, '48055', 6, NULL, 4, 4, 'v');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (11, 'Teleskophaubenwagen', NULL, NULL, NULL, NULL, '46870-01', 7, NULL, 4, 4, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (12, 'Teleskophaubenwagen', NULL, NULL, NULL, NULL, '46870-02', 7, NULL, 4, 4, 'vi');
-INSERT INTO public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) VALUES (13, 'Teleskophaubenwagen', NULL, NULL, NULL, NULL, '46870-03', 7, NULL, 4, 4, 'vi');
+COPY public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) FROM stdin;
+1	Re 460 Helvetia	\N	\N	\N	1	39460	1	\N	3	3	vi
+3	BR 189	\N	\N	\N	1	\N	2	\N	13	13	vi
+4	SBBCI BR 189	\N	\N	\N	1	\N	2	\N	9	8	vi
+9	Schiebewandwagen	\N	\N	\N	1	48025	5	\N	4	4	v
+10	Schiebewandwagen	\N	\N	\N	1	48055	6	\N	4	4	v
+7	Schiebeplanenwagen	\N	\N	\N	1	47060	4	\N	14	4	\N
+8	Schiebeplanenwagen	\N	\N	\N	1	47061	4	\N	4	4	\N
+11	Teleskophaubenwagen	\N	\N	\N	1	46870-01	7	\N	4	4	vi
+12	Teleskophaubenwagen	\N	\N	\N	1	46870-02	7	\N	4	4	vi
+13	Teleskophaubenwagen	\N	\N	\N	1	46870-03	7	\N	4	4	vi
+14	Hochbordwagen	\N	\N	\N	1	46912-01	8	\N	4	4	\N
+15	Hochbordwagen	\N	\N	\N	1	46912-02	8	\N	4	4	\N
+16	Hochbordwagen	\N	\N	\N	1	46912-03	8	\N	4	4	\N
+17	Hochbordwagen	\N	\N	\N	1	46912-04	8	\N	4	4	\N
+18	Hochbordwagen	\N	\N	\N	1	46912-05	8	\N	4	4	\N
+19	Hochbordwagen	\N	\N	\N	1	46912-06	8	\N	4	4	\N
+2	SBB Re 474	\N	\N	\N	1	39893	2	\N	4	8	vi
+5	Rem 487 001	\N	\N	\N	1	36635	3	\N	10	10	vi
+6	BLS BR 187	\N	\N	\N	1	36631	3	\N	7	6	vi
+\.
 
 
 --
 -- Data for Name: item; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (1, NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (2, NULL, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (3, NULL, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (4, NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (5, 'Biene Maja', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (6, NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (8, NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (9, NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (10, NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (11, NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (12, NULL, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (13, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (14, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (15, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (16, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (17, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (18, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (19, NULL, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (20, NULL, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-INSERT INTO public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) VALUES (21, NULL, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+COPY public.item (id, name, model_item, image, image_preview, image_updated, price, date_purchased, coupler, light, int_light, end_light, condition, div_notes, date_created, date_last_changed) FROM stdin;
+1	\N	1	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+2	\N	2	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+3	\N	3	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+4	\N	4	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+5	Biene Maja	5	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+6	\N	6	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+8	\N	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+9	\N	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+10	\N	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+11	\N	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+12	\N	7	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+13	\N	8	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+14	\N	8	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+15	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+16	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+17	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+18	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+19	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+20	\N	10	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+21	\N	10	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+\.
 
 
 --
 -- Data for Name: locomotive; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.locomotive (item, dcc_address, f_light, le_light) FROM stdin;
+\.
 
 
 --
 -- Data for Name: multiple_unit; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.multiple_unit (item, waggon_amount, dcc_address, capacity, f_light, le_light) FROM stdin;
+\.
 
 
 --
 -- Data for Name: proto_class_loadable; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.proto_class_loadable (id, is_coach, capactiy) FROM stdin;
+\.
 
 
 --
 -- Data for Name: proto_class_powered; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.proto_class_powered (id, tractive_force_start, power_cont, power_short, traction_type) FROM stdin;
+\.
 
 
 --
 -- Data for Name: subitem; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.subitem (id, item, name, price) FROM stdin;
+\.
 
 
 --
 -- Data for Name: waggon; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
+COPY public.waggon (item, is_coach, capacity, maxweight) FROM stdin;
+\.
 
 
 --
@@ -199,7 +233,7 @@ SELECT pg_catalog.setval('public.manufacturer_id_seq', 6, true);
 -- Name: model_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tk_user
 --
 
-SELECT pg_catalog.setval('public.model_item_id_seq', 13, true);
+SELECT pg_catalog.setval('public.model_item_id_seq', 19, true);
 
 
 --
