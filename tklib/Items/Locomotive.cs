@@ -33,7 +33,8 @@ namespace tklib
                                                 "LEFT JOIN model_item ON item.model_item = model_item.id " +
                                                 "LEFT JOIN proto_class ON model_item.proto_class = proto_class.id " +
                                                 "LEFT JOIN manufacturer ON model_item.manufacturer = manufacturer.id " +
-                                                "WHERE proto_class.species = 'locomotive'");
+                                                "WHERE proto_class.species = 'locomotive'" +
+                                                "ORDER BY COALESCE(item.name,model_item.name)");
 
             while (dr.Read())
             {
