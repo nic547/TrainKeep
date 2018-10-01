@@ -10,8 +10,8 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout> 
-                            <Label Text="{Binding VisibleName}"/>
-                            <Label Text="{Binding ItemOverview}"/>
+                            <Label Text="{Binding VisibleName}" Style="{StaticResource ItemTitleLabel}"/>
+                            <Label Text="{Binding ItemOverview}" Style="{StaticResource ItemDetailLabel}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
