@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TkMobile.SettingsPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <TableView
+                Intent="Settings">
+                <TableSection Title="Database Connection">
+                    <EntryCell x:Name="IpEntry" Label="IP/Hostname"/>
+                    <EntryCell x:Name="DbEntry" Label="Database"/>
+                    <EntryCell x:Name="UserEntry" Label="Username"/>
+                    <EntryCell x:Name="PwEntry" Label="Password"/>
+                    <ViewCell>
+                        <StackLayout>
+                            <Button Text="Test Connection" x:Name="TestButton" Clicked="TestButton_Clicked"/>
+                            <Label x:Name="FeedbackLabel" Text="Connection State unknown"/>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+                <TableSection Title="Images">
+                    <ViewCell>
+                        <Picker x:Name="ImageLoadingPicker" Title="Load Images">
+                            <Picker.Items>
+                                <x:String>Never</x:String>
+                                <x:String>Over WLAN</x:String>
+                                <x:String>Always</x:String>
+                            </Picker.Items>
+                        </Picker>
+                    </ViewCell>
+                    <SwitchCell Text="Use Tile Layout for Items" x:Name="TileSwitch"/>
+                </TableSection>
+            </TableView>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Save" HorizontalOptions="FillAndExpand" Clicked="SaveButton_Clicked"></Button>
+                <Button Text="Close" HorizontalOptions="FillAndExpand" Clicked="CloseButton_Clicked"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
