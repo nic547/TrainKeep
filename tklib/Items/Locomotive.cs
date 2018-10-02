@@ -29,6 +29,7 @@ namespace tklib
 
         public static async Task Load()
         {
+            items.Clear(); 
             var dr = await TkDatabase.ExecuteQueryAsync("SELECT item.id,item.name,model_item.id,model_item.name,model_item.item_code,proto_class.id,proto_class.name,manufacturer.name FROM item " +
                                                 "LEFT JOIN model_item ON item.model_item = model_item.id " +
                                                 "LEFT JOIN proto_class ON model_item.proto_class = proto_class.id " +
