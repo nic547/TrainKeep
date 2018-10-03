@@ -14,8 +14,7 @@ namespace TkMobile
             InitializeComponent();
             MainPage = new NavigationPage(new MainPage());
         }
-
-
+        
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -30,6 +29,7 @@ namespace TkMobile
         protected override void OnSleep()
         {
             // Handle when your app sleeps
+            Npgsql.NpgsqlConnection.ClearAllPools();
         }
 
         protected override void OnResume()
