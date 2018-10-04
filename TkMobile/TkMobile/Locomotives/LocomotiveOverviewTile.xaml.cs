@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using tklib;
 
 namespace TkMobile.ItemOverviews
 {
@@ -16,5 +17,11 @@ namespace TkMobile.ItemOverviews
 		{
 			InitializeComponent ();
 		}
-	}
+
+        protected override async void OnAppearing()
+        {
+            await Locomotives.Load();
+            
+        }
+    }
 }
