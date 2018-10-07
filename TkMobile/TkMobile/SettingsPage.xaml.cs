@@ -55,6 +55,11 @@ namespace TkMobile
                 FeedbackLabel.Text = "Connection timed out";
             }
             
+            catch(Exception exc) //Handle any leftover Exception
+            {
+                FeedbackLabel.Text = exc.Message;
+            }
+
             TestButton.IsEnabled = true;
         }
 
