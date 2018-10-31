@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.3
--- Dumped by pg_dump version 10.3
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -37,6 +37,7 @@ COPY public.manufacturer (id, name) FROM stdin;
 4	Liliput
 5	LS Models
 6	Lux
+7	HAG Classic
 \.
 
 
@@ -76,8 +77,18 @@ COPY public.proto_class (id, name, species, proto_height, proto_width, proto_len
 6	Habbiillns 	waggon	\N	\N	\N	1	\N	\N	100
 5	Hbbillns	waggon	\N	\N	\N	1	\N	\N	100
 7	Shimmns	waggon	\N	\N	\N	1	\N	\N	100
-8	Fas	waggon	\N	\N	\N	\N	\N	\N	100
-9	Habbiillnss	waggon	\N	\N	\N	\N	\N	\N	120
+9	Habbiillnss	waggon	\N	\N	\N	1	\N	\N	120
+8	Fas	waggon	\N	\N	\N	1	\N	\N	100
+10	Vectron MS	locomotive	\N	\N	\N	1	1	\N	200
+11	TRAXX AC2 F140	locomotive	\N	\N	\N	1	4	\N	140
+12	TRAXX AC1 F140	locomotive	\N	\N	\N	1	4	\N	140
+13	KISS	multipleunit	\N	\N	150.000	2	2	\N	160
+14	Bm 4/4	locomotive	\N	\N	\N	1	3	\N	\N
+15	Eem 923	locomotive	\N	\N	\N	\N	2	\N	100
+16	Re 620	locomotive	\N	\N	\N	\N	3	\N	140
+17	Re 420	locomotive	\N	\N	\N	\N	3	\N	140
+18	Ae 6/6	locomotive	\N	\N	\N	\N	\N	\N	125
+19	Re 465	locomotive	\N	\N	\N	\N	\N	\N	200
 \.
 
 
@@ -110,7 +121,6 @@ COPY public.proto_rw_company (id, name) FROM stdin;
 --
 
 COPY public.model_item (id, name, image, image_preview, image_updated, manufacturer, item_code, proto_class, proto_serial_number, proto_owner, proto_user, epoch) FROM stdin;
-1	Re 460 Helvetia	\N	\N	\N	1	39460	1	\N	3	3	vi
 3	BR 189	\N	\N	\N	1	\N	2	\N	13	13	vi
 4	SBBCI BR 189	\N	\N	\N	1	\N	2	\N	9	8	vi
 9	Schiebewandwagen	\N	\N	\N	1	48025	5	\N	4	4	v
@@ -126,9 +136,18 @@ COPY public.model_item (id, name, image, image_preview, image_updated, manufactu
 17	Hochbordwagen	\N	\N	\N	1	46912-04	8	\N	4	4	\N
 18	Hochbordwagen	\N	\N	\N	1	46912-05	8	\N	4	4	\N
 19	Hochbordwagen	\N	\N	\N	1	46912-06	8	\N	4	4	\N
-2	SBB Re 474	\N	\N	\N	1	39893	2	\N	4	8	vi
 5	Rem 487 001	\N	\N	\N	1	36635	3	\N	10	10	vi
 6	BLS BR 187	\N	\N	\N	1	36631	3	\N	7	6	vi
+20	RABe 511	\N	\N	\N	\N	\N	\N	511 025-5	3	3	vi
+21	Eem 923 Tourbillon	\N	\N	\N	7	20021-32	15	97 85 1923 021-0	4	4	vi
+2	SBB Re 474	\N	\N	\N	1	39893	2	474 014-8	4	8	vi
+1	Re 460 Helvetia	\N	\N	\N	1	39460	1	91 85 4460 084-7	3	3	vi
+22	Bm 4/4 18407	\N	\N	\N	5	17568 S	14	18407	\N	\N	vi
+23	Re 482 'Alpäzähmer'	\N	\N	\N	1	36627	12	91 85 4482 022-1	4	4	\N
+24	Re 482 036-1	\N	\N	\N	1	37446	11	91 85 4482 036-1	4	4	\N
+25	Re 620 058-8	\N	\N	\N	1	37321	16	620 058-8	4	4	\N
+26	Re 6/6 Balerna	\N	\N	\N	1	\N	16	11672	\N	\N	\N
+27	Re 4/4	\N	\N	\N	1	37348	17	11229	\N	\N	\N
 \.
 
 
@@ -157,6 +176,14 @@ COPY public.item (id, name, model_item, image, image_preview, image_updated, pri
 19	\N	9	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 20	\N	10	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 21	\N	10	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+22	Butler Tourbillon	21	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+23	\N	22	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+24	Alpäzähmer	23	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+25	Re 482 Cargo 1	24	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+26	Re 482 Cargo 2	24	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+27	Re 620 Cargo	25	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+28	\N	26	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
+29	\N	27	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -219,28 +246,28 @@ SELECT pg_catalog.setval('public.coupler_id_seq', 3, true);
 -- Name: item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tk_user
 --
 
-SELECT pg_catalog.setval('public.item_id_seq', 21, true);
+SELECT pg_catalog.setval('public.item_id_seq', 29, true);
 
 
 --
 -- Name: manufacturer_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tk_user
 --
 
-SELECT pg_catalog.setval('public.manufacturer_id_seq', 6, true);
+SELECT pg_catalog.setval('public.manufacturer_id_seq', 7, true);
 
 
 --
 -- Name: model_item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tk_user
 --
 
-SELECT pg_catalog.setval('public.model_item_id_seq', 19, true);
+SELECT pg_catalog.setval('public.model_item_id_seq', 27, true);
 
 
 --
 -- Name: proto_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tk_user
 --
 
-SELECT pg_catalog.setval('public.proto_class_id_seq', 9, true);
+SELECT pg_catalog.setval('public.proto_class_id_seq', 19, true);
 
 
 --
