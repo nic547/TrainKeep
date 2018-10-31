@@ -72,13 +72,13 @@ COPY public.proto_manufacturer (id, name) FROM stdin;
 COPY public.proto_class (id, name, species, proto_height, proto_width, proto_lenght_over_buffers, proto_coupler, proto_manufacturer, proto_weight, proto_speed) FROM stdin;
 1	Re 460	locomotive	\N	\N	\N	1	3	\N	200
 2	ES64F4	locomotive	\N	\N	\N	1	1	\N	140
-4	Rilns	waggon	\N	\N	\N	1	\N	\N	100
+4	Rilns	wagon	\N	\N	\N	1	\N	\N	100
 3	TRAXX AC3 F140	locomotive	\N	\N	\N	1	4	\N	140
-6	Habbiillns 	waggon	\N	\N	\N	1	\N	\N	100
-5	Hbbillns	waggon	\N	\N	\N	1	\N	\N	100
-7	Shimmns	waggon	\N	\N	\N	1	\N	\N	100
-9	Habbiillnss	waggon	\N	\N	\N	1	\N	\N	120
-8	Fas	waggon	\N	\N	\N	1	\N	\N	100
+6	Habbiillns 	wagon	\N	\N	\N	1	\N	\N	100
+5	Hbbillns	wagon	\N	\N	\N	1	\N	\N	100
+7	Shimmns	wagon	\N	\N	\N	1	\N	\N	100
+9	Habbiillnss	wagon	\N	\N	\N	1	\N	\N	120
+8	Fas	wagon	\N	\N	\N	1	\N	\N	100
 10	Vectron MS	locomotive	\N	\N	\N	1	1	\N	200
 11	TRAXX AC2 F140	locomotive	\N	\N	\N	1	4	\N	140
 12	TRAXX AC1 F140	locomotive	\N	\N	\N	1	4	\N	140
@@ -199,7 +199,7 @@ COPY public.locomotive (item, dcc_address, f_light, le_light) FROM stdin;
 -- Data for Name: multiple_unit; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-COPY public.multiple_unit (item, waggon_amount, dcc_address, capacity, f_light, le_light) FROM stdin;
+COPY public.multiple_unit (item, wagon_amount, dcc_address, capacity, f_light, le_light) FROM stdin;
 \.
 
 
@@ -228,10 +228,10 @@ COPY public.subitem (id, item, name, price) FROM stdin;
 
 
 --
--- Data for Name: waggon; Type: TABLE DATA; Schema: public; Owner: tk_user
+-- Data for Name: wagon; Type: TABLE DATA; Schema: public; Owner: tk_user
 --
 
-COPY public.waggon (item, is_coach, capacity, maxweight) FROM stdin;
+COPY public.wagon (item, is_coach, capacity, maxweight) FROM stdin;
 \.
 
 
