@@ -8,7 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using tklib;
 
-namespace TkMobile.ItemOverviews
+namespace TkMobile.ItemPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LocomotiveOverviewTile : ContentPage
