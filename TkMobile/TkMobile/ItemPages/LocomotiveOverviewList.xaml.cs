@@ -7,7 +7,7 @@ using tklib;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TkMobile.ItemOverviews
+namespace TkMobile.ItemPages
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LocomotiveOverviewList : ContentPage
@@ -22,5 +22,10 @@ namespace TkMobile.ItemOverviews
             await Locomotives.Load();
             LocoList.ItemsSource = Locomotives.items;
         }
-	}
+
+        private void LocoList_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Navigation.PushAsync(new LocomotiveDetail((Locomotive)e.Item));
+        }
+    }
 }

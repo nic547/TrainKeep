@@ -1,11 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TkMobile.ItemOverviews.LocomotiveOverviewList">
+             x:Class="TkMobile.ItemPages.LocomotiveOverviewList">
     <ContentPage.Content>
         <ListView
             HasUnevenRows="True"
-            x:Name="LocoList">
+            x:Name="LocoList"
+            ItemTapped="LocoList_ItemTapped"
+            >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

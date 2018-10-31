@@ -1,6 +1,6 @@
 -- Author: nic547
 create type traction_type as enum ('steam_coal', 'steam_oil', 'diesel_mechanical', 'diesel_electric', 'diesel_hydraulic', 'gas_turbine', 'electric', 'hybrid', 'other');
-create type tk_species as enum ('waggon', 'locomotive', 'multipleunit');
+create type tk_species as enum ('wagon', 'locomotive', 'multipleunit');
 CREATE TYPE epoch AS ENUM ('i', 'ii', 'iii', 'iv', 'v', 'vi');
 CREATE TYPE condition AS ENUM ( 'perfect', 'very_good', 'good', 'medium', 'bad', 'very_bad', 'trash');
 CREATE TYPE light_tech AS ENUM ('none', 'light_bulb', 'led_unspecified', 'led_yellow', 'led_white', 'led_cold_white', 'led_warm_white');
@@ -109,7 +109,7 @@ CREATE TABLE subitem ( -- Any item that belongs to another item, ex. Decoder
 
 );
 
-CREATE TABLE waggon (
+CREATE TABLE wagon (
 	item						INTEGER PRIMARY KEY REFERENCES item(id),
 	is_coach					BOOLEAN,
 	capacity					INTEGER, -- m³ or seats
@@ -126,7 +126,7 @@ CREATE TABLE locomotive (
 
 CREATE TABLE multiple_unit (
 	item						INTEGER PRIMARY KEY REFERENCES item(id),
-	waggon_amount				INTEGER,
+	wagon_amount				INTEGER,
 	dcc_address					INTEGER,
 	capacity					INTEGER,
 	f_light						frontlight,
