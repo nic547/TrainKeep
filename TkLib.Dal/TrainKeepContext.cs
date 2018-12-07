@@ -18,6 +18,6 @@ namespace TkLib.Dal
             modelBuilder.Entity<Manufacturer>().ToTable("manufacturer");
         }
 
-        public List<Item> Items { get; set; }
+        public DbSet<Item> Items { get; set; }
     }
 }

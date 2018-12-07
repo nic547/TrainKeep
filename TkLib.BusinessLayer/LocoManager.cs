@@ -10,7 +10,7 @@ using TkLib.Dal.Entities;
 
 namespace TkLib.BusinessLayer
 {
-    public class LocoManager : ManagerBase
+    public class ItemManager : ManagerBase
     {
 
         public List<Item> List
@@ -24,12 +24,12 @@ namespace TkLib.BusinessLayer
             }
         }
 
-        public async Task<int> Insert(Item i)
+        public async Task Insert(Item i)
         {
             using (var context = new TrainKeepContext())
             {
-                context.Entry(i).State = EntityState.Added;
-                return await context.SaveChangesAsync();
+                await context.Items.AddAsync(i);
+                await context.SaveChangesAsync();
             }
         }
     }

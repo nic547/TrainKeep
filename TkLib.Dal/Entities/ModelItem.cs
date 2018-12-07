@@ -11,9 +11,13 @@ namespace TkLib.Dal.Entities
         public string Name { get; set; }
 
         public List<Item> Items { get; set; }
+        public int PrototypeId { get; set; }
+        public Prototype Prototype { get; set; }
 
         public string Code { get; set; }
-        public int? ManufacturerId { get; set; }
+        public int ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; }
+        public string ReportingMark { get; set; }
+        public string Livery { get; set; }
     }
 }

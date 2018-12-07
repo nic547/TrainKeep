@@ -7,25 +7,42 @@ using TkLib.Dal;
 
 namespace TkLib.BusinessLayer.Testing
 {
-    public class Tests
+    public class LocomotiveTest: TestBase
     {
         [Fact]
-        public async void LocomotiveInsertTest()
+        public async void InsertTests()
         {
-            var manager = new LocoManager();
-            using (var context = new TrainKeepContext())
+            var manager = new ItemManager();
+
+
+            var manufacturer = new Manufacturer("Märklin");
+            //await manager.Insert(manufacturer);
+
+            
+            var model = new ItemModel()
             {
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
-            }
+                Name = "Elektrolokomotive Reihe 620",
+                Code = "37326",
+                Manufacturer = manufacturer,
+                ReportingMark = "088-5",
+                Livery = "Xrail-Cargo",
+                Prototype = new Prototype()
+                {
+                    Name = "SBB Re 6/6"
+                }
+            };
+            //await manager.Insert(model);
+
             var loco = new Item(Item.ItemType.Locomotive)
             {
-                Name = "X-Rail Re 620",
-                Price = 32000
+                Name = "X-Rail Re 620 Linthal",
+                Price = 320_00,
+                Model = model,
             };
 
             await manager.Insert(loco);
 
+            Assert.NotEmpty(manager.List);
         }
     }
 }
