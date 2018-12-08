@@ -27,7 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\tklib\tklib.csproj" />
+    <ProjectReference Include="..\..\TkLib.BusinessLayer\TkLib.BusinessLayer.csproj" />
+    <ProjectReference Include="..\..\TkLib.Dal\TkLib.Dal.csproj" />
   </ItemGroup>
 
   <ItemGroup>

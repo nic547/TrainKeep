@@ -14,6 +14,7 @@ namespace TkLib.BusinessLayer.Testing
             {
                 using(var context = new TrainKeepContext())
                 {
+                    ManagerBase.SetConnectionString("localhost", "tk_testdb", "postgres", "");
                     context.Database.EnsureDeleted();
                     context.Database.EnsureCreated();
                     IsFirstExecution = false;

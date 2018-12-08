@@ -8,8 +8,14 @@ namespace TkLib.Dal
 {
     public class TrainKeepContext: DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=localhost;Database=tk_testdb;Username=postgres;"); // TODO: Undo the const. connection string
+        static public string Hostname { get; set; }
+        static public string DatabaseName { get; set; }
+        static public string Username { get; set; }
+        static public string Password { get; set; }
+
+
+        override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.UseNpgsql($"Host=localhost;Database=tk_testdb;Username=postgres;"); // TODO: Undo the const. connection string
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

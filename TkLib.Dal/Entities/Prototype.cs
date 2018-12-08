@@ -9,6 +9,6 @@ namespace TkLib.Dal.Entities
         public int PrototypeId { get; set; }
         public string Name { get; set; }
 
-        public List<ItemModel> models { get; set; }
+        public List<ItemModel> Models { get; set; }
     }
 }

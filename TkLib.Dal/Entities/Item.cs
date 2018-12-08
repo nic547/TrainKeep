@@ -6,17 +6,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TkLib.Dal.Entities
 {
     public class Item
-    {
+    {   
+        #nullable enable
         public int ItemID { get; set; }
-        public string Name { get; set; }
-        public int Price { get; set; }
-
+        public string? Name { get; set; }
+        public int? Price { get; set; }
+        
         public enum ItemType { Locomotive, Wagon, MultipleUnit }
 		public ItemType Type { get; set; }
 
         public int? ModelId { get; set; }
-		public ItemModel Model { get; set; }
+		public ItemModel? Model { get; set; }
 
+        // Strings for Display in the UI
+        
+        [NotMapped]
+        public string VisibleName => Name ?? Model?.Name ?? Model?.Prototype?.Name ?? "";
+        [NotMapped]
+        public string ItemOverview => $"{Model?.Prototype.Name}\n{Model?.Manufacturer.Name} {Model?.Code}";
 
 		public Item (ItemType type)
         {

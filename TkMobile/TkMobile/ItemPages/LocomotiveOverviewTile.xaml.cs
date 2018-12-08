@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using tklib;
 
 namespace TkMobile.ItemPages
 {
@@ -18,9 +17,8 @@ namespace TkMobile.ItemPages
 			InitializeComponent ();
 		}
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
-            await Locomotives.Load();
             
         }
     }

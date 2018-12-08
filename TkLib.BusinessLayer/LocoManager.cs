@@ -19,7 +19,12 @@ namespace TkLib.BusinessLayer
             {
                 using (var context = new TrainKeepContext())
                 {
-                    return context.Items.ToList();
+                    return context.Items
+                        .Include(Item => Item.Model)
+                            .ThenInclude(ItemModel => ItemModel.Manufacturer)
+                        .Include(Item => Item.Model)
+                            .ThenInclude(ItemModel => ItemModel.Prototype)
+                        .ToList();
                 }
             }
         }

@@ -32,7 +32,7 @@ namespace TkMobile
         }
 
         private async void TestButton_Clicked(object sender, EventArgs e)
-        {
+        {   /*
             TestButton.IsEnabled = false;
             string connectionString = tklib.TkDatabase.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
             try
@@ -60,12 +60,12 @@ namespace TkMobile
                 FeedbackLabel.Text = exc.Message;
             }
 
-            TestButton.IsEnabled = true;
+            TestButton.IsEnabled = true;*/
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            tklib.TkDatabase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
+            TkLib.BusinessLayer.ManagerBase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
 
             Preferences.Set("IpHostname", IpEntry.Text);
             Preferences.Set("Database", DbEntry.Text);
