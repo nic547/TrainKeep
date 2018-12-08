@@ -70,7 +70,7 @@ namespace TkLib.Dal.Testing
                     }
                 }
             };
-            Assert.Equal("TRAXX F160 AC3 LM\nMärklin XXXXX", protoOnly.ItemOVerview);
+            Assert.Equal("TRAXX F160 AC3 LM\nMärklin XXXXX", protoOnly.ItemOverview);
         }
     }
 }
