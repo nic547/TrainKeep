@@ -31,7 +31,7 @@ namespace TkMobile
 
         }
 
-        private async void TestButton_Clicked(object sender, EventArgs e)
+        private void TestButton_Clicked(object sender, EventArgs e)
         {   /*
             TestButton.IsEnabled = false;
             string connectionString = tklib.TkDatabase.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);

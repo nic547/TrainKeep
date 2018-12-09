@@ -6,9 +6,11 @@
         <ResourceDictionary>
             <Style x:Key="ItemTitleLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="Black" />
+                <Setter Property="Margin" Value="5,5,5,0"/>
             </Style>
             <Style x:Key="ItemDetailLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="Margin" Value="5,0,5,5"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>

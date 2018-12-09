@@ -11,9 +11,6 @@ namespace TkLib.Dal.Entities
         public int ItemID { get; set; }
         public string? Name { get; set; }
         public int? Price { get; set; }
-        
-        public enum ItemType { Locomotive, Wagon, MultipleUnit }
-		public ItemType Type { get; set; }
 
         public int? ModelId { get; set; }
 		public ItemModel? Model { get; set; }
@@ -25,9 +22,5 @@ namespace TkLib.Dal.Entities
         [NotMapped]
         public string ItemOverview => $"{Model?.Prototype.Name}\n{Model?.Manufacturer.Name} {Model?.Code}";
 
-		public Item (ItemType type)
-        {
-            Type = type;
-        }
     }
 }

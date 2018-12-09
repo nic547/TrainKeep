@@ -15,7 +15,7 @@ namespace TkLib.Dal
 
 
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql($"Host=localhost;Database=tk_testdb;Username=postgres;"); // TODO: Undo the const. connection string
+            => optionsBuilder.UseNpgsql($"Host={Hostname};Database={DatabaseName};Username={Username};");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,5 +25,7 @@ namespace TkLib.Dal
         }
 
         public DbSet<Item> Items { get; set; }
+        public DbSet<ItemModel> Models { get; set; }
+        public DbSet<Prototype> Prototypes { get; set; }
     }
 }

@@ -26,14 +26,14 @@ namespace TkLib.BusinessLayer.Testing
                 Manufacturer = manufacturer,
                 ReportingMark = "088-5",
                 Livery = "Xrail-Cargo",
-                Prototype = new Prototype()
+                Prototype = new Prototype(Prototype.PrototypeType.Locomotive)
                 {
                     Name = "SBB Re 6/6"
                 }
             };
             //await manager.Insert(model);
 
-            var loco = new Item(Item.ItemType.Locomotive)
+            var loco = new Item()
             {
                 Name = "X-Rail Re 620 Linthal",
                 Price = 320_00,

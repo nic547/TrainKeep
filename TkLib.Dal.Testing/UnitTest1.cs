@@ -9,11 +9,11 @@ namespace TkLib.Dal.Testing
         [Fact]
         public void VisibleNameTest()
         {
-            var protoOnly = new Item(Item.ItemType.Locomotive)
+            var protoOnly = new Item()
             {
                 Model = new ItemModel()
                 {
-                    Prototype = new Prototype()
+                    Prototype = new Prototype(Prototype.PrototypeType.Locomotive)
                     {
                         Name = "Re 460"
                     }
@@ -21,12 +21,12 @@ namespace TkLib.Dal.Testing
             };
             Assert.Equal("Re 460",protoOnly.VisibleName);
 
-            var ModelNameLoco = new Item(Item.ItemType.Locomotive)
+            var ModelNameLoco = new Item()
             {
                 Model = new ItemModel()
                 {
                     Name = "Re 460 Helvetia",
-                    Prototype = new Prototype()
+                    Prototype = new Prototype(Prototype.PrototypeType.Locomotive)
                     {
                         Name = "Re 460"
                     }
@@ -34,13 +34,13 @@ namespace TkLib.Dal.Testing
             };
             Assert.Equal("Re 460 Helvetia", ModelNameLoco.VisibleName);
        
-            var ActualName = new Item(Item.ItemType.Locomotive)
+            var ActualName = new Item()
             {
                 Name = "Biene Maja",
                 Model = new ItemModel()
                 {
                     Name = "Rem 487",
-                    Prototype = new Prototype()
+                    Prototype = new Prototype(Prototype.PrototypeType.Locomotive)
                     {
                         Name = "TRAXX F160 AC3 LM"
                     }
@@ -48,7 +48,7 @@ namespace TkLib.Dal.Testing
             };
             Assert.Equal("Biene Maja", ActualName.VisibleName);
 
-            var NoName = new Item(Item.ItemType.Locomotive);
+            var NoName = new Item();
             Assert.Equal("", NoName.VisibleName);
         }
 
@@ -56,7 +56,7 @@ namespace TkLib.Dal.Testing
         [Fact]
         public void OverviewTest()
         {
-            var protoOnly = new Item(Item.ItemType.Locomotive)
+            var protoOnly = new Item()
             {
                 Name = "Biene Maja",
                 Model = new ItemModel()
@@ -64,7 +64,7 @@ namespace TkLib.Dal.Testing
                     Name = "Rem 487",
                     Code = "XXXXX",
                     Manufacturer = new Manufacturer("Märklin"),
-                    Prototype = new Prototype()
+                    Prototype = new Prototype(Prototype.PrototypeType.Locomotive)
                     {
                         Name = "TRAXX F160 AC3 LM"
                     }
