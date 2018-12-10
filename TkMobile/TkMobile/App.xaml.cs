@@ -2,7 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using tklib;
+
+using TkLib.BusinessLayer;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TkMobile
@@ -18,12 +19,11 @@ namespace TkMobile
         protected override void OnStart()
         {
             // Handle when your app starts
-            TkDatabase.SetConnectionString(
-                Preferences.Get("IpHostname", "localhost"),
-                Preferences.Get("Database", "trainkeep"),
-                Preferences.Get("Username", "tk_user"),
-                Preferences.Get("Password", "tk_user01")
-                );
+            ManagerBase.SetConnectionString(
+            Preferences.Get("IpHostname", "localhost"),
+            Preferences.Get("Database", "trainkeep"),
+            Preferences.Get("Username", "tk_user"),
+            Preferences.Get("Password", "tk_user01")); 
         }
 
         protected override void OnSleep()

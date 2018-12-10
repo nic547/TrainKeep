@@ -7,24 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using TkLib.BusinessLayer;
-using TkLib.Dal.Entities;
-
 namespace TkMobile.ItemPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LocomotiveDetail : TabbedPage
+    public partial class LocomotiveCreation : ContentPage
     {
-        public Item Item { get; set; }
-        public LocomotiveDetail (Item item)
+        public LocomotiveCreation()
         {
             InitializeComponent();
-            Item = item;
-        }
-
-        protected override void OnAppearing()
-        {
-            
         }
     }
 }

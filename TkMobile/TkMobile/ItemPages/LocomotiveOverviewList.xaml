@@ -2,22 +2,22 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TkMobile.ItemPages.LocomotiveOverviewList">
-    <ContentPage.Content>
+    <StackLayout>
+        <Button Text="Create New"/>
         <ListView
             HasUnevenRows="True"
             x:Name="LocoList"
-            ItemTapped="LocoList_ItemTapped"
-            >
+            ItemTapped="LocoList_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout> 
+                        <StackLayout Spacing="0">
                             <Label Text="{Binding VisibleName}" Style="{StaticResource ItemTitleLabel}"/>
                             <Label Text="{Binding ItemOverview}" Style="{StaticResource ItemDetailLabel}"/>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            </ListView>
-    </ContentPage.Content>
+        </ListView>
+    </StackLayout>
 </ContentPage>

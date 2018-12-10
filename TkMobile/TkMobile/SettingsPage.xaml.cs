@@ -9,6 +9,8 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using TkLib.Dal;
+
 namespace TkMobile
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -31,41 +33,26 @@ namespace TkMobile
 
         }
 
-        private async void TestButton_Clicked(object sender, EventArgs e)
+        private void TestButton_Clicked(object sender, EventArgs e)
         {
             TestButton.IsEnabled = false;
-            string connectionString = tklib.TkDatabase.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
-            try
-            {
-                var connection = new NpgsqlConnection(connectionString);
-                await connection.OpenAsync();
-                if (connection.State == System.Data.ConnectionState.Open)
+            try { 
+            using (var context = new TrainKeepContext())
                 {
-                    FeedbackLabel.Text = "Connection successful";
+                    context.Database.EnsureCreated();
                 }
-                connection.Dispose();
-            }
-            catch(PostgresException exc)
-            {
-                FeedbackLabel.Text = exc.MessageText;
             }
 
-            catch(TimeoutException)
+            catch (Exception exc)
             {
-                FeedbackLabel.Text = "Connection timed out";
-            }
-            
-            catch(Exception exc) //Handle any leftover Exception
-            {
-                FeedbackLabel.Text = exc.Message;
-            }
 
+            }
             TestButton.IsEnabled = true;
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            tklib.TkDatabase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
+            TkLib.BusinessLayer.ManagerBase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
 
             Preferences.Set("IpHostname", IpEntry.Text);
             Preferences.Set("Database", DbEntry.Text);
