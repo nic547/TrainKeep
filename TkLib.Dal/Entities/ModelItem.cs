@@ -19,5 +19,11 @@ namespace TkLib.Dal.Entities
         public Manufacturer Manufacturer { get; set; }
         public string ReportingMark { get; set; }
         public string Livery { get; set; }
+
+        // Xamarin can't (yet) do multibinding, overriding toString is a nice way around it
+        public override string ToString()
+        {
+            return $"{Name} - {Manufacturer.Name}: {Code}";
+        }
     }
 }

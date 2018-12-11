@@ -14,19 +14,25 @@ namespace TkMobile.ItemPages
 	public partial class LocomotiveOverviewList : ContentPage
 	{
         public ItemManager Manager { get; }
+        public List<Item> Items { get; set; }
 		public LocomotiveOverviewList ()
 		{
             Manager = new ItemManager();
 			InitializeComponent ();
 		}
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            LocoList.ItemsSource = Manager.List;
+            // This should be done with Async, but Npgsql seems to have an issue with that
+            // Reset() called on connector with state Connecting
+            // this seems to be the related issue https://github.com/npgsql/npgsql/issues/1127
+
+            Items = await Task.Run(() => Manager.List);
+            LocoList.ItemsSource = Items;
         }
         private void LocoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Navigation.PushAsync(new LocomotiveDetail((Item)e.Item));
+            Navigation.PushAsync(new LocomotiveDetail((Item)e.Item,Manager, Items));
         }
     }
 }
