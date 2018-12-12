@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,12 +20,15 @@ namespace TkLib.BusinessLayer
             {
                 using (var context = new TrainKeepContext())
                 {
-                    return context.Items
+                    var start = DateTime.Now;
+                    List<Item> items = context.Items
                         .Include(Item => Item.Model)
                             .ThenInclude(ItemModel => ItemModel.Manufacturer)
                         .Include(Item => Item.Model)
                             .ThenInclude(ItemModel => ItemModel.Prototype)
                         .ToList();
+                    Debug.WriteLine((DateTime.Now - start).TotalMilliseconds + " ms until Manager loaded");
+                    return items;
                 }
             }
         }

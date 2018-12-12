@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,16 @@ namespace TkMobile.ItemPages
 
         protected override async void OnAppearing()
         {
+            var start = DateTime.Now;
+            
             // This should be done with Async, but Npgsql seems to have an issue with that
             // Reset() called on connector with state Connecting
             // this seems to be the related issue https://github.com/npgsql/npgsql/issues/1127
 
             Items = await Task.Run(() => Manager.List);
             LocoList.ItemsSource = Items;
+
+            Debug.WriteLine((DateTime.Now - start).TotalMilliseconds + " ms until OnAppearing finished");
         }
         private void LocoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
