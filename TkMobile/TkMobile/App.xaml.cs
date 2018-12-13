@@ -24,6 +24,7 @@ namespace TkMobile
                 Preferences.Get("Username", "tk_user"),
                 Preferences.Get("Password", "tk_user01")
                 );
+            TkDatabase.WarmupConnections();
         }
 
         protected override void OnSleep()

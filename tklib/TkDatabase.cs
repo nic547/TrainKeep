@@ -25,6 +25,13 @@ namespace tklib
             var command = new NpgsqlCommand(commandString, connection);
             return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); //The CloseConnection should close the connection once the datareader is disposed of
         }
+
+        public static async void WarmupConnections()
+        {
+            var connection = new NpgsqlConnection(ConnectionString);
+            await connection.OpenAsync();
+            connection.Close();
+        }
     }
 }
  
