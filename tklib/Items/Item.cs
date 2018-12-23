@@ -8,7 +8,7 @@ namespace tklib
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        virtual public ItemModel Model { get; set; }
+        virtual public Model Model { get; set; }
 
         public abstract void LoadAdvanced();
         public string ItemOverview => $"{Model.Prototype.Name}\n{Model.Manufacturer} {Model.ItemCode}";
@@ -23,7 +23,7 @@ namespace tklib
     }
 
 
-    abstract public class ItemModel
+    public class Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -31,12 +31,22 @@ namespace tklib
         public string ItemCode { get; set; }
 
         virtual public Prototype Prototype { get; set; }
-    }
 
-    abstract public class Prototype
+        public override string ToString() => $"{Manufacturer} {ItemCode}: {Name}";
+            }
+
+    public class Prototype
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public Prototype(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
+        public override string ToString() => Name;
     }
 
     class ProtoLoadable

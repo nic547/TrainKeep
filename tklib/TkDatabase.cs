@@ -1,5 +1,7 @@
 ﻿using Npgsql;
+using System;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace tklib
@@ -29,9 +31,12 @@ namespace tklib
         public static async void WarmupConnections()
         {
             var connection = new NpgsqlConnection(ConnectionString);
-            await connection.OpenAsync();
+            try
+            {
+                await connection.OpenAsync();
+            }
+            catch (Exception e) { Debug.WriteLine("Warmup: " + e.Message); }
             connection.Close();
         }
     }
 }
- 

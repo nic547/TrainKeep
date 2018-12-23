@@ -1,8 +1,7 @@
-﻿using System;
+﻿using tklib;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using tklib;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TkMobile
@@ -14,7 +13,7 @@ namespace TkMobile
             InitializeComponent();
             MainPage = new NavigationPage(new MainPage());
         }
-        
+
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -24,6 +23,7 @@ namespace TkMobile
                 Preferences.Get("Username", "tk_user"),
                 Preferences.Get("Password", "tk_user01")
                 );
+
             TkDatabase.WarmupConnections();
         }
 

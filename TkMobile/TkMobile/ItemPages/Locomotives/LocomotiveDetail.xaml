@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TkMobile.ItemPages.LocomotiveDetail">
+    <TableView Intent="Data">
+        <TableSection>
+            <ViewCell>
+                <Image x:Name="ImageThing"/>
+                    <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
+            </ViewCell>
+            <EntryCell Text="{Binding Name, Mode=TwoWay}"/>
+            <ViewCell>
+                <Picker x:Name="ProtoPicker"/>
+            </ViewCell>
+            <ViewCell>
+                <Picker x:Name="ModelPicker"/>
+            </ViewCell>
+        </TableSection>
+    </TableView>
+</ContentPage>

@@ -17,11 +17,5 @@ namespace TkMobile.ItemPages
 		{
 			InitializeComponent ();
 		}
-
-        protected override async void OnAppearing()
-        {
-            await Locomotives.Load();
-            
-        }
     }
 }
