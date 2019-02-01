@@ -13,10 +13,11 @@ namespace TkMobile.ItemPages
             Locomotives = new Locomotives();
             BindingContext = this;
             InitializeComponent();
-            
+
+            LoadData();
         }
 
-        protected override async void OnAppearing()
+        private async void LoadData()
         {
             await Locomotives.Load();
         }
