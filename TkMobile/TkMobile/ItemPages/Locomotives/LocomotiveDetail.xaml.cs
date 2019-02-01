@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using tklib;
+using System.IO;
 
 namespace TkMobile.ItemPages
 {
@@ -25,13 +26,16 @@ namespace TkMobile.ItemPages
             ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
         }
 
-        protected override void OnAppearing()
+        async protected override void OnAppearing()
         {
             ProtoPicker.ItemsSource = Locomotives.Prototypes.Values.ToList();
             ProtoPicker.SelectedItem = Item.Model.Prototype;
 
             ModelPicker.ItemsSource = Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
             ModelPicker.SelectedItem = Item.Model;
+
+            await Item.LoadImage();
+            ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(Item.Image.ToArray()));
         }
     }
 }
