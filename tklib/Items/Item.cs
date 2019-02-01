@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.IO;
 
 namespace tklib
 {
@@ -10,7 +13,7 @@ namespace tklib
         public string Name { get; set; }
         virtual public Model Model { get; set; }
 
-        public abstract void LoadAdvanced();
+        public virtual void LoadAdvanced() { }
         public string ItemOverview => $"{Model.Prototype.Name}\n{Model.Manufacturer} {Model.ItemCode}";
         public string VisibleName //Returns the Model.Name if the User hasn't set the Name of the actual Item
         {
@@ -19,6 +22,18 @@ namespace tklib
                 if (Name != "") { return Name; }
                 else { return Model.Name; }
             }
+        }
+
+        public byte[] Image {get;set;}
+        async public Task LoadImage()
+        {
+            try
+            {
+                var dataReader = await TkDatabase.ExecuteQueryAsync("SELECT image FROM item WHERE id=" + Id + ";");
+                await dataReader.ReadAsync();
+                Image = (byte[])dataReader[0];
+            }
+            catch { }
         }
     }
 

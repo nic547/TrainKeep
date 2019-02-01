@@ -9,10 +9,6 @@ namespace tklib
     public class Locomotive : Item
     {
 
-        public override void LoadAdvanced()
-        {
-            throw new NotImplementedException();
-        }
     }
 
     public class Locomotives
