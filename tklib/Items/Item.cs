@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace tklib
 {
@@ -30,6 +29,7 @@ namespace tklib
                 try
                 {
                     await dataReader.ReadAsync();
+                    if(dataReader[0] == System.DBNull.Value) { return; }
                     Image = (byte[])dataReader[0];
                 }
 

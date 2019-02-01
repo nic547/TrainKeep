@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using tklib;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
-using tklib;
-using System.IO;
 
 namespace TkMobile.ItemPages
 {
@@ -18,8 +12,9 @@ namespace TkMobile.ItemPages
         protected Locomotive Item { get; }
         protected Locomotives Locomotives { get; }
 
-        public LocomotiveDetail (Locomotives locomotives,Locomotive item)
-        {   Item = item;
+        public LocomotiveDetail(Locomotives locomotives, Locomotive item)
+        {
+            Item = item;
             BindingContext = Item;
             Locomotives = locomotives;
             InitializeComponent();
@@ -35,7 +30,11 @@ namespace TkMobile.ItemPages
             ModelPicker.SelectedItem = Item.Model;
 
             await Item.LoadImage();
-            ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(Item.Image.ToArray()));
+
+            if (Item.Image != null)
+            {
+                ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(Item.Image.ToArray()));
+            }
         }
     }
 }
