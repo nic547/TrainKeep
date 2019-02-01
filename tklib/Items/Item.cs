@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using System.IO;
 
 namespace tklib
 {
@@ -24,16 +20,25 @@ namespace tklib
             }
         }
 
-        public byte[] Image {get;set;}
+        public byte[] Image { get; set; }
         async public Task LoadImage()
         {
-            try
+
+            using (var dataReader = await TkDatabase.ExecuteQueryAsync($"SELECT image FROM item WHERE id={Id};"))
             {
-                var dataReader = await TkDatabase.ExecuteQueryAsync("SELECT image FROM item WHERE id=" + Id + ";");
-                await dataReader.ReadAsync();
-                Image = (byte[])dataReader[0];
+
+                try
+                {
+                    await dataReader.ReadAsync();
+                    Image = (byte[])dataReader[0];
+                }
+
+                catch
+                {
+
+                }
             }
-            catch { }
+
         }
     }
 
@@ -48,7 +53,7 @@ namespace tklib
         virtual public Prototype Prototype { get; set; }
 
         public override string ToString() => $"{Manufacturer} {ItemCode}: {Name}";
-            }
+    }
 
     public class Prototype
     {
