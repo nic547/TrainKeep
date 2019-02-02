@@ -13,6 +13,7 @@
     <PackageId>TrainKeep</PackageId>
     <PackageProjectUrl>github.com/nic547/TrainKeep</PackageProjectUrl>
     <RepositoryUrl>github.com/nic547/TrainKeep</RepositoryUrl>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
