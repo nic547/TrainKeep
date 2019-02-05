@@ -29,7 +29,7 @@ namespace tklib
                 try
                 {
                     await dataReader.ReadAsync();
-                    if(dataReader[0] == System.DBNull.Value) { return; }
+                    if (dataReader[0] == System.DBNull.Value) { return; }
                     Image = (byte[])dataReader[0];
                 }
 
@@ -55,27 +55,4 @@ namespace tklib
         public override string ToString() => $"{Manufacturer} {ItemCode}: {Name}";
     }
 
-    public class Prototype
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public Prototype(int id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        public override string ToString() => Name;
-    }
-
-    class ProtoLoadable
-    {
-
-    }
-
-    class ProtoPowered
-    {
-
-    }
 }
