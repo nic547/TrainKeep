@@ -1,4 +1,5 @@
 ﻿using tklib;
+using tklib.db;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,24 +8,26 @@ namespace TkMobile.ItemPages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LocomotiveOverviewList : ContentPage
     {
-        public Locomotives Locomotives { get; set; }
+        private Database Database { get; set; } = DatabaseManager.GetDatabase();
         public LocomotiveOverviewList()
         {
-            Locomotives = new Locomotives();
             BindingContext = this;
             InitializeComponent();
-
             LoadData();
+            LocoList.ItemsSource = Database.Locomotives.Items;
+
+            var test = DatabaseManager.GetDatabase();
         }
 
         private async void LoadData()
         {
-            await Locomotives.Load();
+            await Database.Locomotives.Load();
+            { };
         }
 
         private void LocoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Navigation.PushAsync(new LocomotiveDetail(Locomotives,(Locomotive)e.Item));
+            Navigation.PushAsync(new LocomotiveDetail((Locomotive)e.Item));
         }
     }
 }

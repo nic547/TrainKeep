@@ -1,7 +1,9 @@
-﻿using tklib;
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+
+using tklib;
+using tklib.db;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TkMobile
@@ -13,6 +15,7 @@ namespace TkMobile
             InitializeComponent();
             MainPage = new NavigationPage(new MainPage());
         }
+
 
         protected override void OnStart()
         {

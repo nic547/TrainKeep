@@ -12,5 +12,4 @@
         <Button Text="Locomotives" Clicked="LocomotiveButton_Click"/>
         <Button Text="Settings" Clicked="SettingsButton_Click"/>
     </StackLayout>
-
 </ContentPage>

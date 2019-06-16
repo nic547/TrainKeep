@@ -5,9 +5,8 @@
     <ListView
             HasUnevenRows="True"
             x:Name="LocoList"
-            ItemTapped="LocoList_ItemTapped"
-            ItemsSource="{Binding Locomotives.Items}">
-    <ListView.ItemTemplate>
+            ItemTapped="LocoList_ItemTapped">
+        <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <StackLayout>

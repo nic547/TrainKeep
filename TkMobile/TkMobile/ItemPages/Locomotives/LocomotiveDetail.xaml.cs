@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using tklib;
+using tklib.db;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,23 +11,22 @@ namespace TkMobile.ItemPages
     public partial class LocomotiveDetail : ContentPage
     {
         protected Locomotive Item { get; }
-        protected Locomotives Locomotives { get; }
+        protected Database Database { get; set; } = DatabaseManager.GetDatabase();
 
-        public LocomotiveDetail(Locomotives locomotives, Locomotive item)
+        public LocomotiveDetail(Locomotive item)
         {
             Item = item;
             BindingContext = Item;
-            Locomotives = locomotives;
             InitializeComponent();
             ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
         }
 
         async protected override void OnAppearing()
         {
-            ProtoPicker.ItemsSource = Locomotives.Prototypes.Values.ToList();
+            ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
             ProtoPicker.SelectedItem = Item.Model.Prototype;
 
-            ModelPicker.ItemsSource = Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
+            ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
             ModelPicker.SelectedItem = Item.Model;
 
             await Item.LoadImage();
