@@ -31,7 +31,7 @@
 
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="4.0.7" />
-    <PackageReference Include="StyleCop.MSBuild" Version="6.1.0">
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
