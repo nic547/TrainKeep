@@ -65,5 +65,26 @@ namespace Tklib.Db.Pgsql
             dr.Close();
             Debug.WriteLine((DateTime.Now - start).TotalMilliseconds + "ms until all locomotives were loaded");
         }
+
+        /// <inheritdoc/>
+        public override async Task LoadImage(Locomotive locomotive)
+        {
+            using (var dataReader = await this.PgsqlDb.ExecuteQueryAsync($"SELECT image FROM item WHERE id={locomotive.Id};"))
+            {
+                try
+                {
+                    await dataReader.ReadAsync();
+                    if (dataReader[0] == System.DBNull.Value)
+                    {
+                        return;
+                    }
+
+                    locomotive.Image = (byte[])dataReader[0];
+                }
+                catch
+                {
+                }
+            }
+        }
     }
 }

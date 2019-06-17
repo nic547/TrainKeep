@@ -49,9 +49,9 @@ namespace Tklib
         }
 
         /// <summary>
-        /// Gets a jpg image of the Item. Has to be loaded via <see cref="LoadImage"/>.
+        /// Gets or sets a jpg image of the Item.
         /// </summary>
-        public byte[] Image { get; private set; }
+        public byte[] Image { get; set; }
 
         /// <summary>
         /// Loads the complete set of Information associated with an item and all sub-classes.
