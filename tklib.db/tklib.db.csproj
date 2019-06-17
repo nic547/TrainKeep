@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\tklib\tklib.csproj" />
+    <ProjectReference Include="..\tklib\Tklib.csproj" />
   </ItemGroup>
 
 </Project>

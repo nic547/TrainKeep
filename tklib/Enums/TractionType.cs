@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Dominic Ritz. All Rights Reserved.
+// Licensed under the GNU GPL, Version 3.0 or any later version. See LICENSE in the project root for license information.
 
-namespace tklib.Enums
+namespace Tklib.Enums
 {
     public static class TractionType
     {
-        public enum Type { Unspecified, SteamCoal, SteamOil, DieselMechanical, DieselElectric, DieselHydraulic, GasTurbine, Electric, Hybrid, Other}
+        public enum Type
+        {
+            Unspecified,
+            SteamCoal,
+            SteamOil,
+            DieselMechanical,
+            DieselElectric,
+            DieselHydraulic,
+            GasTurbine,
+            Electric,
+            Hybrid,
+            Other }
 
         public static Type FromString(object o)
         {
             string s = o.ToString().ToLower();
-            s = s.Replace("_", "");
+            s = s.Replace("_", string.Empty);
             switch (s)
             {
                 case "steamcoal": return Type.SteamCoal;

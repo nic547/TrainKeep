@@ -43,7 +43,7 @@
     <ProjectReference Include="..\..\tklib.db.pgsql\tklib.db.pgsql.csproj" />
     <ProjectReference Include="..\..\tklib.dbManager\tklib.dbManager.csproj" />
     <ProjectReference Include="..\..\tklib.db\tklib.db.csproj" />
-    <ProjectReference Include="..\..\tklib\tklib.csproj" />
+    <ProjectReference Include="..\..\tklib\Tklib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

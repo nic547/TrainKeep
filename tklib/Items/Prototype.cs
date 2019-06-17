@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 #nullable enable
 
-namespace tklib
+namespace Tklib
 {
     public class Prototype
     {

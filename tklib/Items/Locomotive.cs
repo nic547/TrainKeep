@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading.Tasks;
-
-namespace tklib
+﻿namespace Tklib
 {
     public class Locomotive : Item
     {
