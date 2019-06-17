@@ -6,11 +6,17 @@ using Tklib;
 
 namespace Tklib.Db
 {
+    /// <summary>
+    /// Contains everything related to locomotives in the database.
+    /// </summary>
     public abstract class Locomotives
     {
         public virtual ObservableCollection<Locomotive> Items { get; set; } = new ObservableCollection<Locomotive>();
+
         public virtual Dictionary<int, Model> Models { get; set; } = new Dictionary<int, Model>();
+
         public virtual Dictionary<int, Prototype> Prototypes { get; set; } = new Dictionary<int, Prototype>();
+
         public abstract Task Load();
     }
 }

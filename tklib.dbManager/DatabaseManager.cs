@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tklib.Db
+﻿namespace Tklib.DbManager
 {
+    using Tklib.Db;
+
     public static class DatabaseManager
     {
         private static Database Database { get; set; }
@@ -16,7 +14,7 @@ namespace Tklib.Db
             }
             else
             {
-                Database = new Pgsql.PgsqlDatabase();
+                Database = new Db.Pgsql.PgsqlDatabase();
                 return Database;
             }
         }

@@ -59,29 +59,5 @@ namespace Tklib
         public virtual void LoadAdvanced()
         {
         }
-
-        /// <summary>
-        /// Tries to load an Image into the Image Property.
-        /// </summary>
-        /// <returns>A <see cref="Task"/> representing the state of the asynchronous operation.</returns>
-        public async Task LoadImage()
-        {
-            using (var dataReader = await TkDatabase.ExecuteQueryAsync($"SELECT image FROM item WHERE id={this.Id};"))
-            {
-                try
-                {
-                    await dataReader.ReadAsync();
-                    if (dataReader[0] == System.DBNull.Value)
-                    {
-                        return;
-                    }
-
-                    this.Image = (byte[])dataReader[0];
-                }
-                catch
-                {
-                }
-            }
-        }
     }
 }

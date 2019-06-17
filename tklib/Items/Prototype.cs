@@ -24,6 +24,7 @@ namespace Tklib
 
         public async void LoadAdvanced()
         {
+            /*
             Advanced = new PrototypeAdvanced();
 
             var ProtoTask = Task.Run(async () => {
@@ -32,7 +33,7 @@ namespace Tklib
                 
             });
 
-           await ProtoTask; 
+           await ProtoTask; */
         }
     }
     public class PrototypeAdvanced

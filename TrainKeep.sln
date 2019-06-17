@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TkMobile.UWP", "TkMobile\Tk
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TkMobile", "TkMobile\TkMobile\TkMobile.csproj", "{30E35E67-DB7A-4D81-84A0-6FF95325D3F7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tklib.db.pgsql", "tklib.db.pgsql\tklib.db.pgsql.csproj", "{556B099C-E9AD-4B0D-BF36-50637E8361DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tklib.Db.Pgsql", "tklib.db.pgsql\Tklib.Db.Pgsql.csproj", "{556B099C-E9AD-4B0D-BF36-50637E8361DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tklib.db", "tklib.db\tklib.db.csproj", "{AFF676E7-1C52-45FB-B170-06736DF8ABD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tklib.Db", "tklib.db\Tklib.Db.csproj", "{AFF676E7-1C52-45FB-B170-06736DF8ABD9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{86A0794D-2E7B-4D15-B0C4-779ECB65B3FB}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		stylecop.json = stylecop.json
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "tklib.dbManager", "tklib.dbManager\tklib.dbManager.csproj", "{F2DE78EF-8796-4C66-8BFD-3968C36A5798}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tklib.DbManager", "tklib.dbManager\Tklib.DbManager.csproj", "{F2DE78EF-8796-4C66-8BFD-3968C36A5798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

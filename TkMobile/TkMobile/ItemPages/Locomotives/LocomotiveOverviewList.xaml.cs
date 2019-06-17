@@ -1,5 +1,6 @@
 ﻿using Tklib;
 using Tklib.Db;
+using Tklib.DbManager;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

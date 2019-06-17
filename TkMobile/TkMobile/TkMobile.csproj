@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -19,10 +19,15 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="DefaultImage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,9 +45,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\tklib.db.pgsql\tklib.db.pgsql.csproj" />
-    <ProjectReference Include="..\..\tklib.dbManager\tklib.dbManager.csproj" />
-    <ProjectReference Include="..\..\tklib.db\tklib.db.csproj" />
+    <ProjectReference Include="..\..\tklib.db.pgsql\Tklib.Db.Pgsql.csproj" />
+    <ProjectReference Include="..\..\tklib.dbManager\Tklib.DbManager.csproj" />
+    <ProjectReference Include="..\..\tklib.db\Tklib.Db.csproj" />
     <ProjectReference Include="..\..\tklib\Tklib.csproj" />
   </ItemGroup>
 

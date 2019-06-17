@@ -2,6 +2,7 @@
 using System.Linq;
 using Tklib;
 using Tklib.Db;
+using Tklib.DbManager;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,7 +30,7 @@ namespace TkMobile.ItemPages
             ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
             ModelPicker.SelectedItem = Item.Model;
 
-            await Item.LoadImage();
+            // await Item.LoadImage();
 
             if (Item.Image != null)
             {
