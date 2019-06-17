@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tklib.db
+namespace Tklib.Db
 {
     public static class DatabaseManager
     {
@@ -14,10 +14,9 @@ namespace tklib.db
             {
                 return Database;
             }
-
             else
             {
-                Database = new pgsql.PgsqlDatabase();
+                Database = new Pgsql.PgsqlDatabase();
                 return Database;
             }
         }

@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Threading.Tasks;
-using tklib.db;
+using Tklib.Db;
 using Npgsql;
 
-namespace tklib.db.pgsql
+namespace Tklib.Db.Pgsql
 {
-    public class PgsqlDatabase : tklib.db.Database
+    public class PgsqlDatabase : Tklib.Db.Database
     {
         public PgsqlDatabase()
         {
-            Locomotives = new pgsql.PgsqlLocomotives();
+            Locomotives = new Pgsql.PgsqlLocomotives();
         }
 
         public override ConnectionState CheckConnectionState()

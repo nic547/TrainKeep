@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\tklib.db\tklib.db.csproj" />
+    <ProjectReference Include="..\tklib.db\Tklib.Db.csproj" />
     <ProjectReference Include="..\tklib\Tklib.csproj" />
   </ItemGroup>
 

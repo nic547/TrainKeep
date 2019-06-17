@@ -2,8 +2,8 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using tklib;
-using tklib.db;
+using Tklib;
+using Tklib.Db;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace TkMobile

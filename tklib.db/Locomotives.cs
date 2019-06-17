@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using tklib;
+using Tklib;
 
-namespace tklib.db
+namespace Tklib.Db
 {
     public abstract class Locomotives
     {

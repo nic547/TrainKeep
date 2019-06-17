@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace tklib.db.pgsql
+namespace Tklib.Db.Pgsql
 {
     public static class PgsqlHelpers
     {

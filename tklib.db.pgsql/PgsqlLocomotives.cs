@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
 using System.Threading.Tasks;
+using Tklib;
 
-namespace tklib.db.pgsql
+namespace Tklib.Db.Pgsql
 {
-    class PgsqlLocomotives : tklib.db.Locomotives
+    public class PgsqlLocomotives : Locomotives
     {
-
         public override async Task Load()
         {
             var start = DateTime.Now;

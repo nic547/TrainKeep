@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\tklib.db.pgsql\tklib.db.pgsql.csproj" />
-    <ProjectReference Include="..\tklib.db\tklib.db.csproj" />
+    <ProjectReference Include="..\tklib.db.pgsql\Tklib.Db.Pgsql.csproj" />
+    <ProjectReference Include="..\tklib.db\Tklib.Db.csproj" />
     <ProjectReference Include="..\tklib\Tklib.csproj" />
   </ItemGroup>
 
