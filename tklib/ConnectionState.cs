@@ -3,8 +3,29 @@
 
 namespace Tklib
 {
-    public class ConnectionState
+    /// <summary>
+    /// The state of a connection.
+    /// </summary>
+    public enum ConnectionState
     {
-        public bool IsWorking { get; }
+        /// <summary>
+        /// The Connection is working
+        /// </summary>
+        IsOK,
+
+        /// <summary>
+        /// Connection doesn't work for some reason
+        /// </summary>
+        FailureUnspecified,
+
+        /// <summary>
+        /// At the given Address no Server was found
+        /// </summary>
+        FailureServerNotFound,
+
+        /// <summary>
+        /// The login failed, probably due wrong Username/Password
+        /// </summary>
+        FailureLogin,
     }
 }

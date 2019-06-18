@@ -50,7 +50,7 @@ namespace Tklib
         public short PowerContinus { get; set; }
         public short PowerShort { get; set; }
         public short AxlePoweredAmount { get; set; }
-        public Enums.TractionType.Type? TractionType { get; set; }
+        public Enums.Traction.TractionType? TractionType { get; set; }
 
         public bool IsLoadable { get; set; }
         public bool IsCoach { get; set; }
