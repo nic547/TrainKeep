@@ -24,8 +24,8 @@ namespace Tklib
         FailureServerNotFound,
 
         /// <summary>
-        /// The login failed, probably due wrong Username/Password
+        /// The login failed due a wrong password
         /// </summary>
-        FailureLogin,
+        FailurePassword,
     }
 }

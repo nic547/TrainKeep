@@ -32,13 +32,13 @@ namespace Tklib.Db
         /// <param name="username">Username, if applicable.</param>
         /// <param name="password">Password, if applicable.</param>
         /// <returns><see cref="ConnectionState"/> describing the result.</returns>
-        public abstract ConnectionState TestConnectionString(string path, string dbname = "", string username = "", string password = "");
+        public abstract Task<ConnectionState> TestConnectionString(string path, string dbname, string username, string password);
 
         /// <summary>
         /// Checks the current state of the connection.
         /// </summary>
         /// <returns><see cref="ConnectionState"/> describing the result.</returns>
-        public abstract ConnectionState CheckConnectionState();
+        public abstract Task<ConnectionState> CheckConnectionState();
 
         /// <summary>
         /// Tries to prepare a Database for usage, for example by already opening connections and putting them into a connection pool

@@ -22,19 +22,6 @@ namespace Tklib
 
         public override string ToString() => Name;
 
-        public async void LoadAdvanced()
-        {
-            /*
-            Advanced = new PrototypeAdvanced();
-
-            var ProtoTask = Task.Run(async () => {
-                var dataReader = await TkDatabase.ExecuteQueryAsync($"SELECT proto_height, proto_width, proto_lenght_over_buffers, proto_weight, axle_formula, axle_amount FROM proto_class WHERE id={Id}");
-                await dataReader.ReadAsync();
-                
-            });
-
-           await ProtoTask; */
-        }
     }
     public class PrototypeAdvanced
     {

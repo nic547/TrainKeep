@@ -25,9 +25,9 @@ namespace Tklib.Db.Pgsql
         private string ConnectionString { get; set; }
 
         /// <inheritdoc/>
-        public override ConnectionState CheckConnectionState()
+        public async override Task<ConnectionState> CheckConnectionState()
         {
-            throw new NotImplementedException();
+            return await this.TestConnectionString(this.ConnectionString);
         }
 
         /// <inheritdoc/>
@@ -59,9 +59,9 @@ namespace Tklib.Db.Pgsql
         }
 
         /// <inheritdoc/>
-        public override ConnectionState TestConnectionString(string path, string dbname = "", string username = "", string password = "")
+        public override async Task<ConnectionState> TestConnectionString(string path, string dbname, string username, string password)
         {
-            throw new NotImplementedException();
+            return await this.TestConnectionString(this.BuildConnectionString(path, dbname, username, password));
         }
 
         /// <summary>
@@ -81,6 +81,33 @@ namespace Tklib.Db.Pgsql
         private string BuildConnectionString(string path, string dbname, string username, string password)
         {
             return $"Server={path};User Id={username};Password={password};Database={dbname};SSL Mode=Prefer;Trust Server Certificate=true;Application Name=TrainKeep;";
+        }
+
+        private async Task<ConnectionState> TestConnectionString(string connectionString)
+        {
+            var connection = new NpgsqlConnection(connectionString);
+            try
+            {
+                await connection.OpenAsync();
+                var command = new NpgsqlCommand("SELECT 1", connection);
+                await command.ExecuteNonQueryAsync();
+                command.Dispose();
+                return ConnectionState.IsOK;
+            }
+            catch (PostgresException e) when (e.SqlState == "28P01")
+            {
+                return ConnectionState.FailurePassword;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("-- Unknown Exception in TestConnectionString() --");
+                Debug.WriteLine(e.ToString());
+                return ConnectionState.FailureUnspecified;
+            }
+            finally
+            {
+                connection.Dispose();
+            }
         }
     }
 }
