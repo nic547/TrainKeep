@@ -29,10 +29,7 @@
         <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.CloseConnections">
             <inheritdoc/>
         </member>
-        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.SetConnectionString(System.String,System.String,System.String,System.String)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.TestConnectionString(System.String,System.String,System.String,System.String)">
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.TestConnectionSettings(Tklib.Db.DbsConnectionSettings)">
             <inheritdoc/>
         </member>
         <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.WarmupConnectionsAsync">

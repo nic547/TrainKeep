@@ -19,7 +19,6 @@ namespace TkMobile
     /// </summary>
     public partial class SettingsPage : ContentPage
     {
-
         private DbsConnectionSettings connectionSettings;
 
         /// <summary>
@@ -27,10 +26,10 @@ namespace TkMobile
         /// </summary>
         public SettingsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.ImageLoadingPicker.SelectedIndex = Preferences.Get("ImageLoadingSetting", 2);
-            this.TileSwitch.On = Preferences.Get("TileLayout", false);
+            ImageLoadingPicker.SelectedIndex = Preferences.Get("ImageLoadingSetting", 2);
+            TileSwitch.On = Preferences.Get("TileLayout", false);
 
             var availableDatabaseSystems = DatabaseConnectionList.Get();
             connectionSettings = availableDatabaseSystems[0];
@@ -42,14 +41,18 @@ namespace TkMobile
 
                 connectionSettings = savedSettings ?? availableDatabaseSystems[0];
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
 
             foreach (var entry in connectionSettings.Settings)
             {
-                var entryCell = new EntryCell();
-                entryCell.Label = entry.Name;
-                entryCell.Text = entry.Value;
-                entryCell.IsEnabled = entry.DisplayToUser;
+                var entryCell = new EntryCell
+                {
+                    Label = entry.Name,
+                    Text = entry.Value,
+                    IsEnabled = entry.DisplayToUser,
+                };
 
                 ConnectionSettingsContainer.Insert(ConnectionSettingsContainer.Count - 1, entryCell);
             }
@@ -61,30 +64,20 @@ namespace TkMobile
 
         private async void TestButton_Clicked(object sender, EventArgs e)
         {
-            this.TestButton.IsEnabled = false;
+            TestButton.IsEnabled = false;
 
             var database = DatabaseManager.GetDatabase();
 
             GatherSettings();
             var state = await database.TestConnectionSettings(connectionSettings);
 
-            switch (state)
+            FeedbackLabel.Text = state switch
             {
-                case Tklib.ConnectionState.IsOK:
-                    this.FeedbackLabel.Text = "Connection succesfull";
-                    break;
-
-                case Tklib.ConnectionState.FailurePassword:
-                    this.FeedbackLabel.Text = "Wrong Password";
-                    break;
-
-                case Tklib.ConnectionState.FailureUnspecified:
-                default:
-                    this.FeedbackLabel.Text = "No Connection could be established";
-                    break;
-            }
-
-            this.TestButton.IsEnabled = true;
+                Tklib.ConnectionState.IsOK => "Connection succesfull",
+                Tklib.ConnectionState.FailurePassword => "Wrong Password",
+                _ => "No Connection could be established",
+            };
+            TestButton.IsEnabled = true;
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
@@ -96,21 +89,21 @@ namespace TkMobile
 
             Preferences.Set("ConnectionSettings", DatabaseManager.SerializeConnectionSettings(connectionSettings));
 
-            Preferences.Set("ImageLoadingSetting", this.ImageLoadingPicker.SelectedIndex);
-            Preferences.Set("TileLayout", this.TileSwitch.On);
+            Preferences.Set("ImageLoadingSetting", ImageLoadingPicker.SelectedIndex);
+            Preferences.Set("TileLayout", TileSwitch.On);
         }
 
         private void GatherSettings()
         {
             foreach (var setting in connectionSettings.Settings)
             { // The horrible reversing twice can be replaced with SkipLast(1) once UWP supports .net standart 2.1
-                setting.Value = ConnectionSettingsContainer.Reverse().Skip(1).Reverse().OfType<EntryCell>().Where(X => X.Label == setting.Name).Single().Text;
+                setting.Value = ConnectionSettingsContainer.Reverse().Skip(1).Reverse().OfType<EntryCell>().Where(x => x.Label == setting.Name).Single().Text;
             }
         }
 
         private void CloseButton_Clicked(object sender, EventArgs e)
         {
-            this.Navigation.PopModalAsync();
+            Navigation.PopModalAsync();
         }
     }
 }

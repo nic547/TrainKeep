@@ -12,34 +12,40 @@ namespace TkMobile.ItemPages
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
+
+    // ggzggzgzgz
     public partial class LocomotiveDetail : ContentPage
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LocomotiveDetail"/> class.
+        /// </summary>
+        /// <param name="item">The <see cref="Locomotive"/> for which the detail page should be shown.</param>
         public LocomotiveDetail(Locomotive item)
         {
-            this.Item = item;
-            this.BindingContext = this.Item;
-            this.InitializeComponent();
-            this.ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
+            Item = item;
+            BindingContext = Item;
+            InitializeComponent();
+            ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
         }
 
-        protected Locomotive Item { get; }
+        private Locomotive Item { get; }
 
-        protected Database Database { get; } = DatabaseManager.GetDatabase();
+        private Database Database { get; } = DatabaseManager.GetDatabase();
 
         /// <inheritdoc/>
         protected async override void OnAppearing()
         {
-            this.ProtoPicker.ItemsSource = this.Database.Locomotives.Prototypes.Values.ToList();
-            this.ProtoPicker.SelectedItem = this.Item.Model.Prototype;
+            ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
+            ProtoPicker.SelectedItem = Item.Model.Prototype;
 
-            this.ModelPicker.ItemsSource = this.Database.Locomotives.Models.Values.Where(x => x.Prototype == this.ProtoPicker.SelectedItem).ToList();
-            this.ModelPicker.SelectedItem = this.Item.Model;
+            ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
+            ModelPicker.SelectedItem = Item.Model;
 
-            await this.Database.Locomotives.LoadImage(this.Item);
+            await Database.Locomotives.LoadImage(Item);
 
-            if (this.Item.Image != null)
+            if (Item.Image != null)
             {
-                this.ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(this.Item.Image.ToArray()));
+                ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(Item.Image.ToArray()));
             }
         }
     }

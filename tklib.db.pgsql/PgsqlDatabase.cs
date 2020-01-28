@@ -86,13 +86,13 @@ namespace Tklib.Db.Pgsql
         /// Executes a string on the database.
         /// </summary>
         /// <param name="commandString">The query to be executed.</param>
-        /// <returns>>A <see cref="Task"/> containing the resulting <see cref="DbDataReader"/>.</placeholder></returns>
+        /// <returns>>A <see cref="Task"/> containing the resulting <see cref="DbDataReader"/>.</returns>
         internal async Task<DbDataReader> ExecuteQueryAsync(string commandString)
         {
-             var connection = new NpgsqlConnection(ConnectionSettings.ToConnectionString());
-             await connection.OpenAsync();
-             var command = new NpgsqlCommand(commandString, connection);
-             return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); // The CloseConnection should close the connection once the datareader is disposed of
+            var connection = new NpgsqlConnection(ConnectionSettings.ToConnectionString());
+            await connection.OpenAsync();
+            var command = new NpgsqlCommand(commandString, connection);
+            return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); // The CloseConnection should close the connection once the datareader is disposed of
         }
     }
 }

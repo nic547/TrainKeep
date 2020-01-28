@@ -17,23 +17,23 @@ namespace TkMobile
         /// </summary>
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            this.Navigation.PushModalAsync(new SettingsPage());
+            Navigation.PushModalAsync(new SettingsPage());
         }
 
         private void LocomotiveButton_Click(object sender, EventArgs e)
         {
             if (Preferences.Get("TileLayout", false))
             {
-                this.Navigation.PushAsync(new ItemPages.LocomotiveOverviewTile());
+                Navigation.PushAsync(new ItemPages.LocomotiveOverviewTile());
             }
             else
             {
-                this.Navigation.PushAsync(new ItemPages.LocomotiveOverviewList());
+                Navigation.PushAsync(new ItemPages.LocomotiveOverviewList());
             }
         }
     }

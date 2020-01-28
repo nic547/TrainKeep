@@ -11,7 +11,7 @@ namespace Tklib.Db
     /// One setting for a database connection (ex. 'hostname=127.0.0.0').
     /// </summary>
     public class SingleDatabaseSetting
-        {
+    {
         private string name;
 
         /// <summary>

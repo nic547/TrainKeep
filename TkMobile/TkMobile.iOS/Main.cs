@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-
-namespace TkMobile.iOS
+﻿namespace TkMobile.iOS
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Foundation;
+    using UIKit;
+
     public class Application
     {
         // This is the main entry point of the application.

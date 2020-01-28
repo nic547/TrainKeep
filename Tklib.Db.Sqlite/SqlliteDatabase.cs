@@ -5,6 +5,8 @@ namespace Tklib.Db.Sqlite
 {
     using System;
     using System.Threading.Tasks;
+    using Tklib;
+    using Tklib.Db;
 
     /// <summary>
     /// Implementation of basic database operations for SQLite.
@@ -32,13 +34,7 @@ namespace Tklib.Db.Sqlite
         }
 
         /// <inheritdoc/>
-        public override void SetConnectionSettings(string path, string dbname = "", string username = "", string password = "")
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public override Task<ConnectionState> TestConnectionSettings(string path, string dbname, string username, string password)
+        public override Task<ConnectionState> TestConnectionSettings(DbsConnectionSettings connectionSettings)
         {
             throw new NotImplementedException();
         }
