@@ -10,6 +10,7 @@ namespace TkMobile.ItemPages
     public partial class LocomotiveOverviewList : ContentPage
     {
         private Database Database { get; set; } = DatabaseManager.GetDatabase();
+
         public LocomotiveOverviewList()
         {
             BindingContext = this;

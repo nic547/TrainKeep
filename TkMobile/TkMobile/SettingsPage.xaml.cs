@@ -4,6 +4,9 @@
 namespace TkMobile
 {
     using System;
+    using System.Linq;
+    using Newtonsoft.Json;
+    using Tklib.Db;
     using Tklib.DbManager;
     using Xamarin.Essentials;
     using Xamarin.Forms;
@@ -12,23 +15,44 @@ namespace TkMobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
     /// <summary>
-    /// <see cref="ContentPage"/> containing the settings for the app
+    /// <see cref="ContentPage"/> containing the settings for the app.
     /// </summary>
     public partial class SettingsPage : ContentPage
     {
+
+        private DbsConnectionSettings connectionSettings;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingsPage"/> class.
         /// </summary>
         public SettingsPage()
         {
             this.InitializeComponent();
-            this.IpEntry.Text = Preferences.Get("IpHostname", "localhost");
-            this.DbEntry.Text = Preferences.Get("Database", "trainkeep");
-            this.UserEntry.Text = Preferences.Get("Username", "tk_user");
-            this.PwEntry.Text = Preferences.Get("Password", "tk_user01");
 
             this.ImageLoadingPicker.SelectedIndex = Preferences.Get("ImageLoadingSetting", 2);
             this.TileSwitch.On = Preferences.Get("TileLayout", false);
+
+            var availableDatabaseSystems = DatabaseConnectionList.Get();
+            connectionSettings = availableDatabaseSystems[0];
+
+            try
+            {
+                string input = Preferences.Get("ConnectionSettings", null);
+                var savedSettings = JsonConvert.DeserializeObject<DbsConnectionSettings>(input);
+
+                connectionSettings = savedSettings ?? availableDatabaseSystems[0];
+            }
+            catch (Exception) { }
+
+            foreach (var entry in connectionSettings.Settings)
+            {
+                var entryCell = new EntryCell();
+                entryCell.Label = entry.Name;
+                entryCell.Text = entry.Value;
+                entryCell.IsEnabled = entry.DisplayToUser;
+
+                ConnectionSettingsContainer.Insert(ConnectionSettingsContainer.Count - 1, entryCell);
+            }
         }
 
         private void Value_Changed(object sender, EventArgs e)
@@ -41,7 +65,8 @@ namespace TkMobile
 
             var database = DatabaseManager.GetDatabase();
 
-            var state = await database.TestConnectionString(this.IpEntry.Text, this.DbEntry.Text, this.UserEntry.Text, this.PwEntry.Text);
+            GatherSettings();
+            var state = await database.TestConnectionSettings(connectionSettings);
 
             switch (state)
             {
@@ -66,15 +91,21 @@ namespace TkMobile
         {
             var database = DatabaseManager.GetDatabase();
 
-            database.SetConnectionString(this.IpEntry.Text, this.DbEntry.Text, this.UserEntry.Text, this.PwEntry.Text);
+            GatherSettings();
+            database.ConnectionSettings = connectionSettings;
 
-            Preferences.Set("IpHostname", this.IpEntry.Text);
-            Preferences.Set("Database", this.DbEntry.Text);
-            Preferences.Set("Username", this.UserEntry.Text);
-            Preferences.Set("Password", this.PwEntry.Text);
+            Preferences.Set("ConnectionSettings", DatabaseManager.SerializeConnectionSettings(connectionSettings));
 
             Preferences.Set("ImageLoadingSetting", this.ImageLoadingPicker.SelectedIndex);
             Preferences.Set("TileLayout", this.TileSwitch.On);
+        }
+
+        private void GatherSettings()
+        {
+            foreach (var setting in connectionSettings.Settings)
+            { // The horrible reversing twice can be replaced with SkipLast(1) once UWP supports .net standart 2.1
+                setting.Value = ConnectionSettingsContainer.Reverse().Skip(1).Reverse().OfType<EntryCell>().Where(X => X.Label == setting.Name).Single().Text;
+            }
         }
 
         private void CloseButton_Clicked(object sender, EventArgs e)

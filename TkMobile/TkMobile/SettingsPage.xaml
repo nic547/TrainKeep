@@ -6,11 +6,7 @@
         <StackLayout>
             <TableView
                 Intent="Settings">
-                <TableSection Title="Database Connection">
-                    <EntryCell x:Name="IpEntry" Label="IP/Hostname"/>
-                    <EntryCell x:Name="DbEntry" Label="Database"/>
-                    <EntryCell x:Name="UserEntry" Label="Username"/>
-                    <EntryCell x:Name="PwEntry" Label="Password"/>
+                <TableSection Title="Database Connection" x:Name="ConnectionSettingsContainer">
                     <ViewCell>
                         <StackLayout>
                             <Button Text="Test Connection" x:Name="TestButton" Clicked="TestButton_Clicked"/>

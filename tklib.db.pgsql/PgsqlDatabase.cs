@@ -19,21 +19,19 @@ namespace Tklib.Db.Pgsql
         /// </summary>
         public PgsqlDatabase()
         {
-            this.Locomotives = new Pgsql.PgsqlLocomotives(this);
+            Locomotives = new Pgsql.PgsqlLocomotives(this);
         }
-
-        private string ConnectionString { get; set; }
 
         /// <inheritdoc/>
         public async override Task<ConnectionState> CheckConnectionState()
         {
-            return await this.TestConnectionString(this.ConnectionString);
+            return await TestConnectionSettings(ConnectionSettings);
         }
 
         /// <inheritdoc/>
         public override async void WarmupConnectionsAsync()
         {
-            var connection = new NpgsqlConnection(this.ConnectionString);
+            var connection = new NpgsqlConnection(ConnectionSettings.ToConnectionString());
             try
             {
                 await connection.OpenAsync();
@@ -52,40 +50,14 @@ namespace Tklib.Db.Pgsql
             NpgsqlConnection.ClearAllPools();
         }
 
-        /// <inheritdoc/>
-        public override void SetConnectionString(string path, string dbname = "", string username = "", string password = "")
-        {
-            this.ConnectionString = this.BuildConnectionString(path, dbname, username, password);
-        }
-
-        /// <inheritdoc/>
-        public override async Task<ConnectionState> TestConnectionString(string path, string dbname, string username, string password)
-        {
-            return await this.TestConnectionString(this.BuildConnectionString(path, dbname, username, password));
-        }
-
         /// <summary>
-        /// Executes a string on the database.
+        /// Tests <see cref="DbsConnectionSettings"/> to see if a database can be found with these settings.
         /// </summary>
-        /// <param name="commandString">The query to be executed.</param>
-        /// <returns>>A <see cref="Task"/> containing the resulting <see cref="DbDataReader"/>.</placeholder></returns>
-        internal async Task<DbDataReader> ExecuteQueryAsync(string commandString)
+        /// <param name="connectionSettings">The settings one wants to test.</param>
+        /// <returns>A <see cref="Task{ConnectionState}"/> representing the result of the asynchronous operation.</returns>
+        public override async Task<ConnectionState> TestConnectionSettings(DbsConnectionSettings connectionSettings)
         {
-            var connection =
-                new NpgsqlConnection(this.ConnectionString);
-            await connection.OpenAsync();
-            var command = new NpgsqlCommand(commandString, connection);
-            return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); // The CloseConnection should close the connection once the datareader is disposed of
-        }
-
-        private string BuildConnectionString(string path, string dbname, string username, string password)
-        {
-            return $"Server={path};User Id={username};Password={password};Database={dbname};SSL Mode=Prefer;Trust Server Certificate=true;Application Name=TrainKeep;";
-        }
-
-        private async Task<ConnectionState> TestConnectionString(string connectionString)
-        {
-            var connection = new NpgsqlConnection(connectionString);
+            var connection = new NpgsqlConnection(connectionSettings.ToConnectionString());
             try
             {
                 await connection.OpenAsync();
@@ -108,6 +80,19 @@ namespace Tklib.Db.Pgsql
             {
                 connection.Dispose();
             }
+        }
+
+        /// <summary>
+        /// Executes a string on the database.
+        /// </summary>
+        /// <param name="commandString">The query to be executed.</param>
+        /// <returns>>A <see cref="Task"/> containing the resulting <see cref="DbDataReader"/>.</placeholder></returns>
+        internal async Task<DbDataReader> ExecuteQueryAsync(string commandString)
+        {
+             var connection = new NpgsqlConnection(ConnectionSettings.ToConnectionString());
+             await connection.OpenAsync();
+             var command = new NpgsqlCommand(commandString, connection);
+             return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); // The CloseConnection should close the connection once the datareader is disposed of
         }
     }
 }

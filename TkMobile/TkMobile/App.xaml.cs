@@ -1,4 +1,6 @@
-﻿using Tklib;
+﻿// Copyright (c) Dominic Ritz. All Rights Reserved.
+// Licensed under the GNU GPL, Version 3.0 or any later version. See LICENSE in the project root for license information.
+
 using Tklib.Db;
 using Tklib.DbManager;
 using Xamarin.Essentials;
@@ -6,6 +8,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+
 namespace TkMobile
 {
     /// <inheritdoc/>
@@ -22,14 +25,8 @@ namespace TkMobile
         protected override void OnStart()
         {
            Database database = DatabaseManager.GetDatabase();
-
-           database.SetConnectionString(
-                Preferences.Get("IpHostname", "localhost"),
-                Preferences.Get("Database", "trainkeep"),
-                Preferences.Get("Username", "tk_user"),
-                Preferences.Get("Password", "tk_user01")
-                );
-
+           var settings = DatabaseManager.TryDeserializeConnectionSettings(Preferences.Get("ConnectionString", string.Empty));
+           database.ConnectionSettings = settings ?? DatabaseConnectionList.Get()[0];
            database.WarmupConnectionsAsync();
         }
 

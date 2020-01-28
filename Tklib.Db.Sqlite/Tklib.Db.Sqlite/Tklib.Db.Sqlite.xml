@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Tklib.Db.Sqlite</name>
+    </assembly>
+    <members>
+        <member name="T:Tklib.Db.Sqlite.SqliteLocomotives">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqliteLocomotives.Load">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqliteLocomotives.LoadImage(Tklib.Locomotive)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Tklib.Db.Sqlite.SqlliteDatabase">
+            <summary>
+            Implementation of basic database operations for SQLite.
+            </summary>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Tklib.Db.Sqlite.SqlliteDatabase"/> class.
+            </summary>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.CheckConnectionState">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.CloseConnections">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.SetConnectionString(System.String,System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.TestConnectionString(System.String,System.String,System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Tklib.Db.Sqlite.SqlliteDatabase.WarmupConnectionsAsync">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

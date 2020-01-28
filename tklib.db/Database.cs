@@ -16,23 +16,18 @@ namespace Tklib.Db
         public Locomotives Locomotives { get; set; }
 
         /// <summary>
-        /// Sets the connection string.
+        /// Gets or sets the connections settings of this database.
         /// </summary>
-        /// <param name="path">Path or URL to the Database(-server).</param>
-        /// <param name="dbname">Name of the database, if applicable.</param>
-        /// <param name="username">Username, if applicable.</param>
-        /// <param name="password">Password, if applicable.</param>
-        public abstract void SetConnectionString(string path, string dbname = "", string username = "", string password = "");
+        public DbsConnectionSettings ConnectionSettings { get; set; }
 
         /// <summary>
         /// Tests a connection string.
         /// </summary>
-        /// <param name="path">Path or URL to the Database(-server).</param>
-        /// <param name="dbname">Name of the database, if applicable.</param>
-        /// <param name="username">Username, if applicable.</param>
-        /// <param name="password">Password, if applicable.</param>
+        /// <param name="connectionSettings">Path or URL to the Database(-server).</param>
+        /// <returns><see cref="ConnectionState"/>describing the result.</returns>
+
         /// <returns><see cref="ConnectionState"/> describing the result.</returns>
-        public abstract Task<ConnectionState> TestConnectionString(string path, string dbname, string username, string password);
+        public abstract Task<ConnectionState> TestConnectionSettings(DbsConnectionSettings connectionSettings);
 
         /// <summary>
         /// Checks the current state of the connection.
@@ -41,8 +36,8 @@ namespace Tklib.Db
         public abstract Task<ConnectionState> CheckConnectionState();
 
         /// <summary>
-        /// Tries to prepare a Database for usage, for example by already opening connections and putting them into a connection pool
-        /// The goal is to be ready when the first data is requested.
+        /// Tries to prepare the connection for usage, for example by already opening a bunch of connections and putting them into a connection pool.
+        /// Idealy this should reduce the overhead of the first request.
         /// </summary>
         public abstract void WarmupConnectionsAsync();
 

@@ -16,7 +16,7 @@ namespace Tklib.Db.Pgsql
         /// <param name="db">Database.</param>
         public PgsqlLocomotives(PgsqlDatabase db)
         {
-            this.PgsqlDb = db;
+            PgsqlDb = db;
         }
 
         private PgsqlDatabase PgsqlDb { get; }
@@ -25,8 +25,8 @@ namespace Tklib.Db.Pgsql
         public override async Task Load()
         {
             var start = DateTime.Now;
-            this.Items.Clear();
-            var dr = await this.PgsqlDb.ExecuteQueryAsync("SELECT item.id,item.name,model_item.id,model_item.name,model_item.item_code,proto_class.id,proto_class.name,manufacturer.name FROM item " +
+            Items.Clear();
+            var dr = await PgsqlDb.ExecuteQueryAsync("SELECT item.id,item.name,model_item.id,model_item.name,model_item.item_code,proto_class.id,proto_class.name,manufacturer.name FROM item " +
                                                 "LEFT JOIN model_item ON item.model_item = model_item.id " +
                                                 "LEFT JOIN proto_class ON model_item.proto_class = proto_class.id " +
                                                 "LEFT JOIN manufacturer ON model_item.manufacturer = manufacturer.id " +
@@ -35,13 +35,13 @@ namespace Tklib.Db.Pgsql
 
             while (dr.Read())
             {
-                if (!this.Prototypes.TryGetValue((int)dr[5], out Prototype prototype))
+                if (!Prototypes.TryGetValue((int)dr[5], out Prototype prototype))
                 {
                     prototype = new Prototype((int)dr[5], dr[6].ToString());
-                    this.Prototypes.Add(prototype.Id, prototype);
+                    Prototypes.Add(prototype.Id, prototype);
                 }
 
-                if (!this.Models.TryGetValue((int)dr[2], out Model model))
+                if (!Models.TryGetValue((int)dr[2], out Model model))
                 {
                     model = new Model()
                     {
@@ -51,10 +51,10 @@ namespace Tklib.Db.Pgsql
                         ItemCode = dr[4].ToString(),
                         Prototype = prototype,
                     };
-                    this.Models.Add(model.Id, model);
+                    Models.Add(model.Id, model);
                 }
 
-                this.Items.Add(new Locomotive()
+                Items.Add(new Locomotive()
                 {
                     Id = (int)dr[0],
                     Name = dr[1].ToString(),
@@ -69,21 +69,19 @@ namespace Tklib.Db.Pgsql
         /// <inheritdoc/>
         public override async Task LoadImage(Locomotive locomotive)
         {
-            using (var dataReader = await this.PgsqlDb.ExecuteQueryAsync($"SELECT image FROM item WHERE id={locomotive.Id};"))
+            using var dataReader = await PgsqlDb.ExecuteQueryAsync($"SELECT image FROM item WHERE id={locomotive.Id};");
+            try
             {
-                try
+                await dataReader.ReadAsync();
+                if (dataReader[0] == System.DBNull.Value)
                 {
-                    await dataReader.ReadAsync();
-                    if (dataReader[0] == System.DBNull.Value)
-                    {
-                        return;
-                    }
+                    return;
+                }
 
-                    locomotive.Image = (byte[])dataReader[0];
-                }
-                catch
-                {
-                }
+                locomotive.Image = (byte[])dataReader[0];
+            }
+            catch
+            {
             }
         }
     }
