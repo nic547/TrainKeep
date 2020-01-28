@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -13,11 +13,13 @@
     <PackageId>TrainKeep</PackageId>
     <PackageProjectUrl>github.com/nic547/TrainKeep</PackageProjectUrl>
     <RepositoryUrl>github.com/nic547/TrainKeep</RepositoryUrl>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,17 +27,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Include="DefaultImage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Npgsql" Version="4.0.3" />
-    <PackageReference Include="Xamarin.Essentials" Version="0.10.0-preview" />
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Npgsql" Version="4.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991477" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\tklib\tklib.csproj" />
+    <ProjectReference Include="..\..\tklib.db.pgsql\Tklib.Db.Pgsql.csproj" />
+    <ProjectReference Include="..\..\tklib.dbManager\Tklib.DbManager.csproj" />
+    <ProjectReference Include="..\..\tklib.db\Tklib.Db.csproj" />
+    <ProjectReference Include="..\..\tklib\Tklib.csproj" />
   </ItemGroup>
 
   <ItemGroup>

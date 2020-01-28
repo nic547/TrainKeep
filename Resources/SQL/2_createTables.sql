@@ -50,14 +50,17 @@ CREATE TABLE proto_class (
 	proto_coupler				INTEGER REFERENCES proto_coupler(id),
 	proto_manufacturer			INTEGER REFERENCES proto_manufacturer,
 	proto_weight				INTEGER,
-	proto_speed					SMALLINT
+	proto_speed					SMALLINT,
+	axle_formula				TEXT,
+	axle_amount					SMALLINT
 );
 
 CREATE TABLE proto_class_powered (
 	id							INTEGER PRIMARY KEY REFERENCES proto_class(id),
 	tractive_force_start		SMALLINT,
-	power_cont					INTEGER,
-	power_short					INTEGER,
+	power_cont					SMALLINT,
+	power_short					SMALLINT,
+	axle_powered_amount			SMALLINT,
 	traction_type				TRACTION_TYPE
 );
 

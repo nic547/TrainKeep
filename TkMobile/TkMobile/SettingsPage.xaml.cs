@@ -1,83 +1,116 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Npgsql;
-using Xamarin.Essentials;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿// Copyright (c) Dominic Ritz. All Rights Reserved.
+// Licensed under the GNU GPL, Version 3.0 or any later version. See LICENSE in the project root for license information.
 
 namespace TkMobile
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SettingsPage : ContentPage
-	{
-		public SettingsPage ()
-		{
-			InitializeComponent ();
-            IpEntry.Text = Preferences.Get("IpHostname", "localhost");
-            DbEntry.Text = Preferences.Get("Database", "trainkeep");
-            UserEntry.Text = Preferences.Get("Username", "tk_user");
-            PwEntry.Text = Preferences.Get("Password", "tk_user01");
+    using System;
+    using System.Linq;
+    using Newtonsoft.Json;
+    using Tklib.Db;
+    using Tklib.DbManager;
+    using Xamarin.Essentials;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
 
-            ImageLoadingPicker.SelectedIndex = Preferences.Get("ImageLoadingSetting", 2);
-            TileSwitch.On = Preferences.Get("TileLayout", false);
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+
+    /// <summary>
+    /// <see cref="ContentPage"/> containing the settings for the app.
+    /// </summary>
+    public partial class SettingsPage : ContentPage
+    {
+
+        private DbsConnectionSettings connectionSettings;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SettingsPage"/> class.
+        /// </summary>
+        public SettingsPage()
+        {
+            this.InitializeComponent();
+
+            this.ImageLoadingPicker.SelectedIndex = Preferences.Get("ImageLoadingSetting", 2);
+            this.TileSwitch.On = Preferences.Get("TileLayout", false);
+
+            var availableDatabaseSystems = DatabaseConnectionList.Get();
+            connectionSettings = availableDatabaseSystems[0];
+
+            try
+            {
+                string input = Preferences.Get("ConnectionSettings", null);
+                var savedSettings = JsonConvert.DeserializeObject<DbsConnectionSettings>(input);
+
+                connectionSettings = savedSettings ?? availableDatabaseSystems[0];
+            }
+            catch (Exception) { }
+
+            foreach (var entry in connectionSettings.Settings)
+            {
+                var entryCell = new EntryCell();
+                entryCell.Label = entry.Name;
+                entryCell.Text = entry.Value;
+                entryCell.IsEnabled = entry.DisplayToUser;
+
+                ConnectionSettingsContainer.Insert(ConnectionSettingsContainer.Count - 1, entryCell);
+            }
+        }
 
         private void Value_Changed(object sender, EventArgs e)
         {
-
         }
 
         private async void TestButton_Clicked(object sender, EventArgs e)
         {
-            TestButton.IsEnabled = false;
-            string connectionString = tklib.TkDatabase.BuildConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
-            try
+            this.TestButton.IsEnabled = false;
+
+            var database = DatabaseManager.GetDatabase();
+
+            GatherSettings();
+            var state = await database.TestConnectionSettings(connectionSettings);
+
+            switch (state)
             {
-                var connection = new NpgsqlConnection(connectionString);
-                await connection.OpenAsync();
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    FeedbackLabel.Text = "Connection successful";
-                }
-                connection.Dispose();
-            }
-            catch(PostgresException exc)
-            {
-                FeedbackLabel.Text = exc.MessageText;
+                case Tklib.ConnectionState.IsOK:
+                    this.FeedbackLabel.Text = "Connection succesfull";
+                    break;
+
+                case Tklib.ConnectionState.FailurePassword:
+                    this.FeedbackLabel.Text = "Wrong Password";
+                    break;
+
+                case Tklib.ConnectionState.FailureUnspecified:
+                default:
+                    this.FeedbackLabel.Text = "No Connection could be established";
+                    break;
             }
 
-            catch(TimeoutException)
-            {
-                FeedbackLabel.Text = "Connection timed out";
-            }
-            
-            catch(Exception exc) //Handle any leftover Exception
-            {
-                FeedbackLabel.Text = exc.Message;
-            }
-
-            TestButton.IsEnabled = true;
+            this.TestButton.IsEnabled = true;
         }
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            tklib.TkDatabase.SetConnectionString(IpEntry.Text, DbEntry.Text, UserEntry.Text, PwEntry.Text);
+            var database = DatabaseManager.GetDatabase();
 
-            Preferences.Set("IpHostname", IpEntry.Text);
-            Preferences.Set("Database", DbEntry.Text);
-            Preferences.Set("Username", UserEntry.Text);
-            Preferences.Set("Password", PwEntry.Text);
+            GatherSettings();
+            database.ConnectionSettings = connectionSettings;
 
-            Preferences.Set("ImageLoadingSetting", ImageLoadingPicker.SelectedIndex);
-            Preferences.Set("TileLayout", TileSwitch.On);
+            Preferences.Set("ConnectionSettings", DatabaseManager.SerializeConnectionSettings(connectionSettings));
+
+            Preferences.Set("ImageLoadingSetting", this.ImageLoadingPicker.SelectedIndex);
+            Preferences.Set("TileLayout", this.TileSwitch.On);
         }
-            private void CloseButton_Clicked(object sender, EventArgs e)
+
+        private void GatherSettings()
         {
-            Navigation.PopModalAsync();
+            foreach (var setting in connectionSettings.Settings)
+            { // The horrible reversing twice can be replaced with SkipLast(1) once UWP supports .net standart 2.1
+                setting.Value = ConnectionSettingsContainer.Reverse().Skip(1).Reverse().OfType<EntryCell>().Where(X => X.Label == setting.Name).Single().Text;
+            }
+        }
+
+        private void CloseButton_Clicked(object sender, EventArgs e)
+        {
+            this.Navigation.PopModalAsync();
         }
     }
 }
