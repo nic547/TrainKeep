@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
-using UIKit;
-
-namespace TkMobile.iOS
+﻿namespace TkMobile.iOS
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using Foundation;
+    using UIKit;
+
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.

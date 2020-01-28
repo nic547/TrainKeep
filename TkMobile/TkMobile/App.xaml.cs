@@ -14,20 +14,22 @@ namespace TkMobile
     /// <inheritdoc/>
     public partial class App : Application
     {
-        /// <inheritdoc/>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="App"/> class.
+        /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.MainPage = new NavigationPage(new MainPage());
+            InitializeComponent();
+            MainPage = new NavigationPage(new MainPage());
         }
 
         /// <inheritdoc/>
         protected override void OnStart()
         {
-           Database database = DatabaseManager.GetDatabase();
-           var settings = DatabaseManager.TryDeserializeConnectionSettings(Preferences.Get("ConnectionString", string.Empty));
-           database.ConnectionSettings = settings ?? DatabaseConnectionList.Get()[0];
-           database.WarmupConnectionsAsync();
+            Database database = DatabaseManager.GetDatabase();
+            var settings = DatabaseManager.TryDeserializeConnectionSettings(Preferences.Get("ConnectionString", string.Empty));
+            database.ConnectionSettings = settings ?? DatabaseConnectionList.Get()[0];
+            database.WarmupConnectionsAsync();
         }
 
         /// <inheritdoc/>

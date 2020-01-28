@@ -1,12 +1,22 @@
-﻿namespace Tklib.DbManager
+﻿// Copyright (c) Dominic Ritz. All Rights Reserved.
+// Licensed under the GNU GPL, Version 3.0 or any later version. See LICENSE in the project root for license information.
+
+namespace Tklib.DbManager
 {
     using Newtonsoft.Json;
     using Tklib.Db;
 
+    /// <summary>
+    /// Contains application logic related to databases.
+    /// </summary>
     public static class DatabaseManager
     {
         private static Database Database { get; set; }
 
+        /// <summary>
+        /// Gets the database singleton.
+        /// </summary>
+        /// <returns>The <see cref="Database"/>-singleton.</returns>
         public static Database GetDatabase()
         {
             if (Database != null)

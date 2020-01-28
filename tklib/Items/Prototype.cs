@@ -1,47 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Copyright (c) Dominic Ritz. All Rights Reserved.
+// Licensed under the GNU GPL, Version 3.0 or any later version. See LICENSE in the project root for license information.
 
 #nullable enable
 
 namespace Tklib
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Represents the real deal.
+    /// </summary>
     public class Prototype
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public PrototypeAdvanced? Advanced { get; set; }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Prototype"/> class.
+        /// </summary>
+        /// <param name="id"><see cref="Id"/>.</param>
+        /// <param name="name"><see cref="Name"/>.</param>
         public Prototype(int id, string name)
         {
             Id = id;
             Name = name;
         }
 
+        /// <summary>
+        /// Gets or sets the database id of the object.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Name of the Prototype.
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets <see cref="PrototypeAdvanced"/>.
+        /// </summary>
+        public PrototypeAdvanced? Advanced { get; set; }
+
+        /// <inheritdoc/>
         public override string ToString() => Name;
-
-    }
-    public class PrototypeAdvanced
-    {
-        public decimal Height { get; set; }
-        public decimal Width { get; set; }
-        public decimal Lenght { get; set; }
-        public int Weight { get; set; }
-        public string? AxleFormula { get; set; }
-        public short AxleAmount { get; set; }
-        
-        public bool IsPowered { get; set; }
-        public short TractiveEffort { get; set; }
-        public short PowerContinus { get; set; }
-        public short PowerShort { get; set; }
-        public short AxlePoweredAmount { get; set; }
-        public Enums.Traction.TractionType? TractionType { get; set; }
-
-        public bool IsLoadable { get; set; }
-        public bool IsCoach { get; set; }
-        public short Capacity { get; set; }
-
     }
 }

@@ -13,10 +13,19 @@ namespace Tklib
         /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the name of the model.
+        /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the manufacturer of the model.
+        /// </summary>
         public string Manufacturer { get; set; }
 
+        /// <summary>
+        /// Gets or sets the item code, SKU or however it's called.
+        /// </summary>
         public string ItemCode { get; set; }
 
         /// <summary>
