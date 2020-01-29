@@ -13,8 +13,11 @@ namespace TkMobile.ItemPages
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    // ggzggzgzgz
+#pragma warning disable SA1601 // Partial elements should be documented
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class LocomotiveDetail : ContentPage
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning restore SA1601 // Partial elements should be documented
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LocomotiveDetail"/> class.

@@ -11,7 +11,9 @@
     // User Interface of the application, as well as listening (and optionally responding) to 
     // application events from iOS.
     [Register("AppDelegate")]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
         //
         // This method is invoked when the application has loaded and is ready to run. In this 

@@ -14,10 +14,11 @@ namespace TkMobile
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    /// <summary>
-    /// <see cref="ContentPage"/> containing the settings for the app.
-    /// </summary>
+#pragma warning disable SA1601 // Partial elements should be documented
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public partial class SettingsPage : ContentPage
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning restore SA1601 // Partial elements should be documented
     {
         private DbsConnectionSettings connectionSettings;
 
