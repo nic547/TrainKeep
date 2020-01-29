@@ -7,6 +7,9 @@
     using Foundation;
     using UIKit;
 
+    /// <summary>
+    /// Main class of the iOS app.
+    /// </summary>
     public class Application
     {
         // This is the main entry point of the application.

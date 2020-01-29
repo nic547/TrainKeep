@@ -13,9 +13,15 @@ namespace TkMobile.ItemPages
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    /// <inheritdoc/>
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable SA1601 // Partial elements should be documented
     public partial class LocomotiveOverviewTile : ContentPage
+#pragma warning restore SA1601 // Partial elements should be documented
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LocomotiveOverviewTile"/> class.
+        /// </summary>
         public LocomotiveOverviewTile()
         {
             InitializeComponent();
