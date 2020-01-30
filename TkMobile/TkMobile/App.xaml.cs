@@ -27,7 +27,7 @@ namespace TkMobile
         protected override void OnStart()
         {
             Database database = DatabaseManager.GetDatabase();
-            var settings = DatabaseManager.TryDeserializeConnectionSettings(Preferences.Get("ConnectionString", string.Empty));
+            var settings = DatabaseManager.TryDeserializeConnectionSettings(Preferences.Get("ConnectionSettings", string.Empty));
             database.ConnectionSettings = settings ?? DatabaseConnectionList.Get()[0];
             database.WarmupConnectionsAsync();
         }
