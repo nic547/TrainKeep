@@ -4,13 +4,32 @@
 namespace Tklib.Db.Sqlite
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
+    using Tklib;
 
     /// <inheritdoc/>
-    public class SqliteLocomotives : Locomotives
+    public class SqliteItems : Items
     {
+        public SqliteItems(string vehicleType, Database database)
+            : base(vehicleType, database)
+        {
+        }
+
+        public override void Create(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Create(Model model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Create(Prototype prototype)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <inheritdoc/>
         public override Task Load()
         {
@@ -18,7 +37,12 @@ namespace Tklib.Db.Sqlite
         }
 
         /// <inheritdoc/>
-        public override Task LoadImage(Locomotive locomotive)
+        public override Task LoadImage(Item item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Update(Item item)
         {
             throw new NotImplementedException();
         }

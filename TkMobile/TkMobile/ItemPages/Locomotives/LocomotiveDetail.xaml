@@ -15,6 +15,9 @@
             <ViewCell>
                 <Picker x:Name="ModelPicker"/>
             </ViewCell>
+            <ViewCell>
+                <Button Text="TEST" Clicked="TestButton_Clicked"/>
+            </ViewCell>
         </TableSection>
     </TableView>
 </ContentPage>

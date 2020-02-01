@@ -24,7 +24,7 @@ namespace TkMobile.ItemPages
             BindingContext = this;
             InitializeComponent();
             LoadData();
-            LocoList.ItemsSource = Database.Locomotives.Items;
+            LocoList.ItemsSource = Database.Locomotives.Collection;
         }
 
         private Database Database { get; set; } = DatabaseManager.GetDatabase();
@@ -36,7 +36,7 @@ namespace TkMobile.ItemPages
 
         private void LocoList_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Navigation.PushAsync(new LocomotiveDetail((Locomotive)e.Item));
+            Navigation.PushAsync(new LocomotiveDetail((Item)e.Item));
         }
     }
 }

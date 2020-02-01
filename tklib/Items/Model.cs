@@ -34,6 +34,6 @@ namespace Tklib
         public virtual Prototype Prototype { get; set; }
 
         /// <inheritdoc/>
-        public override string ToString() => $"{this.Manufacturer} {this.ItemCode}: {this.Name}";
+        public override string ToString() => $"{Manufacturer} {ItemCode}: {Name}";
     }
 }

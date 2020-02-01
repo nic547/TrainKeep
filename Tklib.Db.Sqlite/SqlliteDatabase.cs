@@ -18,7 +18,7 @@ namespace Tklib.Db.Sqlite
         /// </summary>
         public SqlliteDatabase()
         {
-            Locomotives = new SqliteLocomotives();
+            Locomotives = new SqliteItems("locomotive", this);
         }
 
         /// <inheritdoc/>
