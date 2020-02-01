@@ -13,7 +13,7 @@ namespace Tklib.Db
         /// <summary>
         /// Gets or sets the object containing everything related to Locomotives.
         /// </summary>
-        public Locomotives Locomotives { get; set; }
+        public Items Locomotives { get; set; }
 
         /// <summary>
         /// Gets or sets the connections settings of this database.

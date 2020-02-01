@@ -9,7 +9,7 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout>
+                    <StackLayout Padding="5">
                         <Label Text="{Binding VisibleName}" Style="{StaticResource ItemTitleLabel}"/>
                         <Label Text="{Binding ItemOverview}" Style="{StaticResource ItemDetailLabel}"/>
                     </StackLayout>

@@ -8,7 +8,7 @@ namespace Tklib
     /// <summary>
     /// Base class, represents one existing Item.
     /// </summary>
-    public abstract class Item
+    public class Item
     {
         /// <summary>
         /// Gets or sets the id given to the Item by the Datbase-System.
@@ -21,6 +21,16 @@ namespace Tklib
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the notes of the Item.
+        /// </summary>
+        public string Notes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets the DCC Adress.
+        /// </summary>
+        public int Dcc { get; set; }
+
+        /// <summary>
         /// Gets or sets the model this item is a instance of.
         /// </summary>
         public virtual Model Model { get; set; }
@@ -28,7 +38,7 @@ namespace Tklib
         /// <summary>
         /// Gets a Overivew Text for an Item.
         /// </summary>
-        public string ItemOverview => $"{this.Model.Prototype.Name}\n{this.Model.Manufacturer} {this.Model.ItemCode}";
+        public string ItemOverview => $"{Model.Prototype.Name}\n{Model.Manufacturer} {Model.ItemCode}";
 
         /// <summary>
         /// Gets the Name of an Item, but falls back to the Name of the Model or even the prototype.
@@ -37,13 +47,13 @@ namespace Tklib
         {
             get
             {
-                if (this.Name != string.Empty)
+                if (Name != string.Empty)
                 {
-                    return this.Name;
+                    return Name;
                 }
                 else
                 {
-                    return this.Model.Name;
+                    return Model.Name;
                 }
             }
         }
@@ -52,12 +62,5 @@ namespace Tklib
         /// Gets or sets a jpg image of the Item.
         /// </summary>
         public byte[] Image { get; set; }
-
-        /// <summary>
-        /// Loads the complete set of Information associated with an item and all sub-classes.
-        /// </summary>
-        public virtual void LoadAdvanced()
-        {
-        }
     }
 }

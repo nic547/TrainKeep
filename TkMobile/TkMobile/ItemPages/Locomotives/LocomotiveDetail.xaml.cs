@@ -3,6 +3,7 @@
 
 namespace TkMobile.ItemPages
 {
+    using System;
     using System.IO;
     using System.Linq;
     using Tklib;
@@ -22,8 +23,8 @@ namespace TkMobile.ItemPages
         /// <summary>
         /// Initializes a new instance of the <see cref="LocomotiveDetail"/> class.
         /// </summary>
-        /// <param name="item">The <see cref="Locomotive"/> for which the detail page should be shown.</param>
-        public LocomotiveDetail(Locomotive item)
+        /// <param name="item">The <see cref="Item"/> for which the detail page should be shown.</param>
+        public LocomotiveDetail(Item item)
         {
             Item = item;
             BindingContext = Item;
@@ -31,7 +32,7 @@ namespace TkMobile.ItemPages
             ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
         }
 
-        private Locomotive Item { get; }
+        private Item Item { get; }
 
         private Database Database { get; } = DatabaseManager.GetDatabase();
 
@@ -50,6 +51,19 @@ namespace TkMobile.ItemPages
             {
                 ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(Item.Image.ToArray()));
             }
+        }
+
+        private void TestButton_Clicked(object sender, EventArgs e)
+        {
+            Database.Locomotives.Create(
+                new Prototype()
+                {
+                    Name = "Vectron",
+                    Power = 6400,
+                    TractiveEffort = 300,
+                    Speed = 200,
+                }
+            );
         }
     }
 }
