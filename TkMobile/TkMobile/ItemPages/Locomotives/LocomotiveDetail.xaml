@@ -10,7 +10,7 @@
             </ViewCell>
             <EntryCell Text="{Binding Name, Mode=TwoWay}"/>
             <ViewCell>
-                <Picker x:Name="ProtoPicker"/>
+                <Picker x:Name="ProtoPicker" SelectedIndexChanged="ProtoPicker_SelectedIndexChanged"/>
             </ViewCell>
             <ViewCell>
                 <Picker x:Name="ModelPicker"/>
