@@ -38,5 +38,10 @@ namespace TkMobile.ItemPages
         {
             Navigation.PushAsync(new LocomotiveDetail((Item)e.Item));
         }
+
+        private void ToolbarItem_Clicked(object sender, System.EventArgs e)
+        {
+            Navigation.PushAsync(new LocomotiveDetail(new Item()));
+        }
     }
 }
