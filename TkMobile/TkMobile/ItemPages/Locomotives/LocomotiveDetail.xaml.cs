@@ -33,6 +33,8 @@ namespace TkMobile.ItemPages
         }
 
         private Item Item { get; }
+        private Model model { get; set; }
+        private Prototype prototype { get; set; }
 
         private Database Database { get; } = DatabaseManager.GetDatabase();
 
@@ -41,6 +43,9 @@ namespace TkMobile.ItemPages
         {
             ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
             ProtoPicker.SelectedItem = Item?.Model?.Prototype;
+
+            // Not done via bindings because I'm not smart enough to stop it from displaying zero that way.
+            DCCCell.Text = Item.Dcc != 0 ? Item.Dcc.ToString() : string.Empty;
 
             UpdateModelSelector();
 
@@ -52,20 +57,6 @@ namespace TkMobile.ItemPages
             }
         }
 
-        private void TestButton_Clicked(object sender, EventArgs e)
-        {
-
-            Database.Locomotives.Create(
-                new Prototype()
-                {
-                    Name = "Vectron",
-                    Power = 6400,
-                    TractiveEffort = 300,
-                    Speed = 200,
-                }
-            );
-        }
-
         private void UpdateModelSelector()
         {
             ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
@@ -74,7 +65,28 @@ namespace TkMobile.ItemPages
 
         private void ProtoPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             UpdateModelSelector();
+        }
+
+        private async void ToolbarNewModel_Clicked(object sender, EventArgs e)
+        {
+            void Action(string result)
+            {
+                Database.Locomotives.Insert(new Model() { Name = result, Prototype = (Prototype)ProtoPicker.SelectedItem });
+            }
+
+            await Navigation.PushModalAsync(new PromptPage("Enter the name of the model", Action));
+        }
+
+        private async void ToolbarNewProto_Clicked(object sender, EventArgs e)
+        {
+            void Action(string result)
+            {
+                Database.Locomotives.Insert(new Prototype() { Name = result });
+            }
+
+            await Navigation.PushModalAsync(new PromptPage("Enter the name of the prototype", Action));
         }
     }
 }

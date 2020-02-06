@@ -10,22 +10,31 @@ namespace Tklib.Db.Sqlite
     /// <inheritdoc/>
     public class SqliteItems : Items
     {
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SqliteItems"/> class.
+        /// </summary>
+        /// <param name="vehicleType">The type of vehicles this object is repsonsible for.</param>
+        /// <param name="database">The database.</param>
         public SqliteItems(string vehicleType, Database database)
             : base(vehicleType, database)
         {
         }
 
-        public override void Create(Item item)
+        /// <inheritdoc/>
+        public override void Insert(Item item)
         {
             throw new NotImplementedException();
         }
 
-        public override void Create(Model model)
+        /// <inheritdoc/>
+        public override void Insert(Model model)
         {
             throw new NotImplementedException();
         }
 
-        public override void Create(Prototype prototype)
+        /// <inheritdoc/>
+        public override void Insert(Prototype prototype)
         {
             throw new NotImplementedException();
         }
@@ -42,6 +51,7 @@ namespace Tklib.Db.Sqlite
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
         public override void Update(Item item)
         {
             throw new NotImplementedException();

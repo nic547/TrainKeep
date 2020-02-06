@@ -94,13 +94,5 @@ namespace Tklib.Db.Pgsql
             var command = new NpgsqlCommand(commandString, connection);
             return await command.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection); // The CloseConnection should close the connection once the datareader is disposed of
         }
-
-        internal DbDataReader ExecuteQuery(string commandString)
-        {
-            var connection = new NpgsqlConnection(ConnectionSettings.ToConnectionString());
-            connection.Open();
-            var command = new NpgsqlCommand(commandString, connection);
-            return command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-        }
     }
 }

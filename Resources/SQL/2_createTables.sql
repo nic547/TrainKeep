@@ -32,7 +32,7 @@ CREATE TABLE proto_class (
 	proto_weight				INTEGER,
 	proto_speed					SMALLINT,
 	engine_tractive_effort		SMALLINT,
-	egine_power					SMALLINT
+	engine_power					SMALLINT
 );
 
 CREATE TABLE model_item (
