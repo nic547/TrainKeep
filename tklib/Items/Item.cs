@@ -53,7 +53,7 @@ namespace Tklib
                 }
                 else
                 {
-                    return Model.Name;
+                    return Model?.Name;
                 }
             }
         }

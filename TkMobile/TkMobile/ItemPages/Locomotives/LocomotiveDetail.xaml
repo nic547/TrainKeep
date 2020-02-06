@@ -2,11 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TkMobile.ItemPages.LocomotiveDetail">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="Create new model"
+            Order="Secondary"
+            Clicked="ToolbarNewModel_Clicked"/>
+        <ToolbarItem
+            Text="Create new Prototype"
+            Order="Secondary"
+            Clicked="ToolbarNewProto_Clicked"/>
+    </ContentPage.ToolbarItems>
     <TableView Intent="Data" HasUnevenRows="True">
-        <TableSection>
+        <TableSection Title="General">
             <ViewCell>
                 <Image x:Name="ImageThing"/>
-                    <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
+                <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
             </ViewCell>
             <EntryCell Text="{Binding Name, Mode=TwoWay}"/>
             <ViewCell>
@@ -15,9 +25,20 @@
             <ViewCell>
                 <Picker x:Name="ModelPicker"/>
             </ViewCell>
+        </TableSection>
+        <TableSection Title="Item-specific">
+            <EntryCell Keyboard="Numeric" x:Name="DCCCell"/>
             <ViewCell>
-                <Button Text="TEST" Clicked="TestButton_Clicked"/>
+                <Editor Text="{Binding Notes, Mode=TwoWay}" AutoSize="TextChanges" />
             </ViewCell>
+        </TableSection>
+        <TableSection Title="Model-specific">
+            <EntryCell Label="Model Name" Text="{Binding Item.ModelItem.Name}"/>
+            <EntryCell Label="Manufacturer" IsEnabled="False"/>
+            <EntryCell Label="Item code" Text="{Binding Item.ModelItem.ItemCode}"/>
+        </TableSection>
+        <TableSection Title="Prototype-specific">
+
         </TableSection>
     </TableView>
 </ContentPage>

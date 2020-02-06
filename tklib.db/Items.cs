@@ -62,12 +62,28 @@ namespace Tklib.Db
         /// <returns><see cref="Task"/>representing the async operation.</returns>
         public abstract Task LoadImage(Item item);
 
-        public abstract void Create(Item item);
+        /// <summary>
+        /// Insert a new Item into the Database.
+        /// </summary>
+        /// <param name="item">The <see cref="Item"/> to be inserted.</param>
+        public abstract void Insert(Item item);
 
-        public abstract void Create(Model model);
+        /// <summary>
+        /// Insert a new Model into the Database.
+        /// </summary>
+        /// <param name="model">The <see cref="Model"/> to be inserted.</param>
+        public abstract void Insert(Model model);
 
-        public abstract void Create(Prototype prototype);
+        /// <summary>
+        /// Insert a new Prototype into the Database.
+        /// </summary>
+        /// <param name="prototype">The <see cref="Prototype"/> to be inserted.</param>
+        public abstract void Insert(Prototype prototype);
 
+        /// <summary>
+        /// Update a Item allready existing in the databse.
+        /// </summary>
+        /// <param name="item">The <see cref="Item"/> to be updated.</param>
         public abstract void Update(Item item);
     }
 }

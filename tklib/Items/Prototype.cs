@@ -23,12 +23,24 @@ namespace Tklib
         /// </summary>
         public string Name { get; set; }
 
+        /// <summary>
+        /// Gets or sets the weight of the prototype. Assumed to be in kg.
+        /// </summary>
         public int Weight { get; set; }
 
+        /// <summary>
+        /// Gets or sets the speed of the prototype. Assumed to be in km/h.
+        /// </summary>
         public short Speed { get; set; }
 
+        /// <summary>
+        /// Gets or Sets the tractive effort of the prototype. Assumed to be in kN.
+        /// </summary>
         public short TractiveEffort { get; set; }
 
+        /// <summary>
+        /// Gets or sets the power of the prototype. Assumed to be in kW.
+        /// </summary>
         public short Power { get; set; }
 
         /// <inheritdoc/>
