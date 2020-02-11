@@ -12,33 +12,42 @@
             Order="Secondary"
             Clicked="ToolbarNewProto_Clicked"/>
     </ContentPage.ToolbarItems>
-    <TableView Intent="Data" HasUnevenRows="True">
-        <TableSection Title="General">
-            <ViewCell>
-                <Image x:Name="ImageThing"/>
-                <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
-            </ViewCell>
-            <EntryCell Text="{Binding Name, Mode=TwoWay}"/>
-            <ViewCell>
-                <Picker x:Name="ProtoPicker" SelectedIndexChanged="ProtoPicker_SelectedIndexChanged"/>
-            </ViewCell>
-            <ViewCell>
-                <Picker x:Name="ModelPicker"/>
-            </ViewCell>
-        </TableSection>
-        <TableSection Title="Item-specific">
-            <EntryCell Keyboard="Numeric" x:Name="DCCCell"/>
-            <ViewCell>
-                <Editor Text="{Binding Notes, Mode=TwoWay}" AutoSize="TextChanges" />
-            </ViewCell>
-        </TableSection>
-        <TableSection Title="Model-specific">
-            <EntryCell Label="Model Name" Text="{Binding Item.ModelItem.Name}"/>
-            <EntryCell Label="Manufacturer" IsEnabled="False"/>
-            <EntryCell Label="Item code" Text="{Binding Item.ModelItem.ItemCode}"/>
-        </TableSection>
-        <TableSection Title="Prototype-specific">
-
-        </TableSection>
-    </TableView>
+    <StackLayout>
+        <TableView Intent="Data" HasUnevenRows="True">
+            <TableSection Title="General">
+                <ViewCell>
+                    <Image x:Name="ImageThing"/>
+                    <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
+                </ViewCell>
+                <EntryCell x:Name="ItemNameCell" Text="{Binding Name}"/>
+                <ViewCell>
+                    <Picker x:Name="ProtoPicker" SelectedIndexChanged="ProtoPicker_SelectedIndexChanged"/>
+                </ViewCell>
+                <ViewCell>
+                    <Picker x:Name="ModelPicker" SelectedIndexChanged="ModelPicker_SelectedIndexChanged"/>
+                </ViewCell>
+            </TableSection>
+            <TableSection x:Name="ItemSection"  Title="Item-specific">
+                <EntryCell Label="DCC address" x:Name="ItemDccCell" Keyboard="Numeric"/>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="Notes"/>
+                        <Editor x:Name="ItemNotesEditor" Text="{Binding Notes}" AutoSize="TextChanges" />
+                    </StackLayout>
+                </ViewCell>
+            </TableSection>
+            <TableSection x:Name="ModelSection" Title="Model-specific">
+                <EntryCell Label="Model Name" Text="{Binding Name}"/>
+                <EntryCell Label="Manufacturer" IsEnabled="False" Text="{Binding Manufacturer}"/>
+                <EntryCell Label="Item code" Text="{Binding ItemCode}"/>
+            </TableSection>
+            <TableSection x:Name="ProtoSection" Title="Prototype-specific">
+                <EntryCell Label="Prototype name" Text="{Binding Name}"/>
+            </TableSection>
+        </TableView>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Save" HorizontalOptions="FillAndExpand" Clicked="SaveButton_Clicked"></Button>
+            <Button Text="Close" HorizontalOptions="FillAndExpand" Clicked="CloseButton_Clicked"></Button>
+        </StackLayout>
+    </StackLayout>
 </ContentPage>
