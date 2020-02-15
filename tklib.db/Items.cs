@@ -81,9 +81,21 @@ namespace Tklib.Db
         public abstract void Insert(Prototype prototype);
 
         /// <summary>
-        /// Update a Item allready existing in the databse.
+        /// Update an existing item.
         /// </summary>
         /// <param name="item">The <see cref="Item"/> to be updated.</param>
         public abstract void Update(Item item);
+
+        /// <summary>
+        /// Update an existing model.
+        /// </summary>
+        /// <param name="model">The <see cref="Model"/> to be updated.</param>
+        public abstract void Update(Model model);
+
+        /// <summary>
+        /// Update an existing prototype.
+        /// </summary>
+        /// <param name="prototype">The <see cref="Prototype"/> to be updated.</param>
+        public abstract void Update(Prototype prototype);
     }
 }
