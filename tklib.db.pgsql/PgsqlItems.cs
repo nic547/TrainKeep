@@ -149,5 +149,17 @@ namespace Tklib.Db.Pgsql
         {
             throw new NotImplementedException();
         }
+
+        /// <inheritdoc/>
+        public override void Update(Model model)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <inheritdoc/>
+        public override void Update(Prototype prototype)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

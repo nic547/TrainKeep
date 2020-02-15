@@ -108,9 +108,22 @@ namespace TkMobile.ItemPages
 
             item.Model.Name = ModelItemCodeCell.Text;
 
+            item.Model.Prototype.Name = ProtoNameCell.Text;
+            item.Model.Prototype.Speed = ProtoSpeedCell.Text.ParseToShort();
+            item.Model.Prototype.Power = ProtoPowerCell.Text.ParseToShort();
+            item.Model.Prototype.TractiveEffort = ProtoTractiveEffortCell.Text.ParseToShort();
+            item.Model.Prototype.Weight = ProtoWeightCell.Text.ParseToInt();
+
+            Database.Locomotives.Update(item.Model.Prototype);
+            Database.Locomotives.Update(item.Model);
+
             if (item.Id == 0)
             {
                 Database.Locomotives.Insert(item);
+            }
+            else
+            {
+                Database.Locomotives.Update(item);
             }
 
             Navigation.PopAsync();

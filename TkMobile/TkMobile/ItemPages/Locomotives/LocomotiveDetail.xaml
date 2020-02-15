@@ -42,11 +42,11 @@
                 <EntryCell Label="Item code" Text="{Binding ItemCode}" x:Name="ModelItemCodeCell"/>
             </TableSection>
             <TableSection x:Name="ProtoSection" Title="Prototype-specific">
-                <EntryCell Label="Prototype name" Text="{Binding Name}"/>
-                <EntryCell Label="Speed" Text="{Binding Speed}"/>
-                <EntryCell Label="Power" Text="{Binding Power}"/>
-                <EntryCell Label="Tractive Effort" Text="{Binding TractiveEffort}"/>
-                <EntryCell Label="Weight" Text="{Binding Weight}"/>
+                <EntryCell Label="Prototype name" Text="{Binding Name}" x:Name="ProtoNameCell"/>
+                <EntryCell Label="Speed" Text="{Binding Speed}" x:Name="ProtoSpeedCell"/>
+                <EntryCell Label="Power" Text="{Binding Power}" x:Name="ProtoPowerCell"/>
+                <EntryCell Label="Tractive Effort" Text="{Binding TractiveEffort}" x:Name="ProtoTractiveEffortCell"/>
+                <EntryCell Label="Weight" Text="{Binding Weight}" x:Name="ProtoWeightCell"/>
             </TableSection>
         </TableView>
         <StackLayout Orientation="Horizontal">
