@@ -28,7 +28,7 @@ namespace Tklib
         /// <summary>
         /// Gets or Sets the DCC Adress.
         /// </summary>
-        public int Dcc { get; set; }
+        public int? Dcc { get; set; }
 
         /// <summary>
         /// Gets or sets the model this item is a instance of.

@@ -10,7 +10,6 @@ namespace Tklib.Db.Sqlite
     /// <inheritdoc/>
     public class SqliteItems : Items
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SqliteItems"/> class.
         /// </summary>
