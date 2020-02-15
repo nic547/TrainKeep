@@ -67,6 +67,8 @@ namespace Tklib.Db.Pgsql
         {
             var start = DateTime.Now;
             Collection.Clear();
+            Models.Clear();
+            Prototypes.Clear();
             var dr = await pgDatabase.ExecuteQueryAsync("SELECT item.id,item.name,item.dcc,model_item.id,model_item.name,model_item.item_code,manufacturer.name,proto_class.id,proto_class.name,proto_weight,proto_speed,engine_tractive_effort,engine_power FROM item " +
                                                 "RIGHT JOIN model_item ON item.model_item = model_item.id " +
                                                 "RIGHT JOIN proto_class ON model_item.proto_class = proto_class.id " +
