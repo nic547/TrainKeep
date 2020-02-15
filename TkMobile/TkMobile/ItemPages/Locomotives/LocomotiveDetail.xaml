@@ -28,7 +28,7 @@
                 </ViewCell>
             </TableSection>
             <TableSection x:Name="ItemSection"  Title="Item-specific">
-                <EntryCell Label="DCC address" x:Name="ItemDccCell" Keyboard="Numeric"/>
+                <EntryCell Label="DCC address" Text="{Binding Dcc}" x:Name="ItemDccCell" Keyboard="Numeric"/>
                 <ViewCell>
                     <StackLayout>
                         <Label Text="Notes"/>
@@ -37,12 +37,16 @@
                 </ViewCell>
             </TableSection>
             <TableSection x:Name="ModelSection" Title="Model-specific">
-                <EntryCell Label="Model Name" Text="{Binding Name}"/>
+                <EntryCell Label="Model Name" Text="{Binding Name}" x:Name="ModelNameCell"/>
                 <EntryCell Label="Manufacturer" IsEnabled="False" Text="{Binding Manufacturer}"/>
-                <EntryCell Label="Item code" Text="{Binding ItemCode}"/>
+                <EntryCell Label="Item code" Text="{Binding ItemCode}" x:Name="ModelItemCodeCell"/>
             </TableSection>
             <TableSection x:Name="ProtoSection" Title="Prototype-specific">
                 <EntryCell Label="Prototype name" Text="{Binding Name}"/>
+                <EntryCell Label="Speed" Text="{Binding Speed}"/>
+                <EntryCell Label="Power" Text="{Binding Power}"/>
+                <EntryCell Label="Tractive Effort" Text="{Binding TractiveEffort}"/>
+                <EntryCell Label="Weight" Text="{Binding Weight}"/>
             </TableSection>
         </TableView>
         <StackLayout Orientation="Horizontal">

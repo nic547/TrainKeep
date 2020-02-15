@@ -11,6 +11,7 @@ namespace TkMobile.ItemPages
     using Tklib.DbManager;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
+    using static Tklib.Util.Parse;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -53,9 +54,6 @@ namespace TkMobile.ItemPages
             ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
             ProtoPicker.SelectedItem = item?.Model?.Prototype;
 
-            // Not done via bindings because I'm not smart enough to stop it from displaying zero that way.
-            ItemDccCell.Text = item.Dcc != 0 ? item.Dcc.ToString() : string.Empty;
-
             UpdateModelSelector();
             ModelPicker.SelectedItem = item?.Model;
 
@@ -75,6 +73,8 @@ namespace TkMobile.ItemPages
         private void ProtoPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateModelSelector();
+            prototype = (Prototype)ProtoPicker.SelectedItem;
+            ProtoSection.BindingContext = prototype;
         }
 
         private async void ToolbarNewModel_Clicked(object sender, EventArgs e)
@@ -99,26 +99,26 @@ namespace TkMobile.ItemPages
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            item.Name = ItemNameCell.Text;
-            try
-            {
-                item.Dcc = short.Parse(ItemDccCell.Text);
-            }
-            catch
-            {
-            }
-
-            item.Notes = ItemNotesEditor.Text;
             item.Model = model;
+            item.Model.Prototype = prototype;
+
+            item.Name = ItemNameCell.Text;
+            item.Dcc = ItemDccCell.Text.ParseToShort();
+            item.Notes = ItemNotesEditor.Text;
+
+            item.Model.Name = ModelItemCodeCell.Text;
 
             if (item.Id == 0)
             {
                 Database.Locomotives.Insert(item);
             }
+
+            Navigation.PopAsync();
         }
 
         private void CloseButton_Clicked(object sender, EventArgs e)
         {
+            Navigation.PopAsync();
         }
 
         private void ModelPicker_SelectedIndexChanged(object sender, EventArgs e)

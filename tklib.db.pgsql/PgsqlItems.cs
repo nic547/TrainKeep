@@ -7,6 +7,7 @@ namespace Tklib.Db.Pgsql
     using System.Diagnostics;
     using System.Threading.Tasks;
     using Tklib;
+    using Tklib.Util;
 
     /// <inheritdoc/>
     public class PgsqlItems : Items
@@ -66,38 +67,41 @@ namespace Tklib.Db.Pgsql
         {
             var start = DateTime.Now;
             Collection.Clear();
-            var dr = await pgDatabase.ExecuteQueryAsync("SELECT item.id,item.name,model_item.id,model_item.name,model_item.item_code,proto_class.id,proto_class.name,manufacturer.name FROM item " +
+            var dr = await pgDatabase.ExecuteQueryAsync("SELECT item.id,item.name,item.dcc,model_item.id,model_item.name,model_item.item_code,manufacturer.name,proto_class.id,proto_class.name,proto_weight,proto_speed,engine_tractive_effort,engine_power FROM item " +
                                                 "RIGHT JOIN model_item ON item.model_item = model_item.id " +
                                                 "RIGHT JOIN proto_class ON model_item.proto_class = proto_class.id " +
                                                 "LEFT JOIN manufacturer ON model_item.manufacturer = manufacturer.id " +
-                                                "WHERE proto_class.vehicle_type = '" + VehicleType + "'" +
-                                                "ORDER BY COALESCE(item.name,model_item.name)");
+                                                "WHERE proto_class.vehicle_type = '" + VehicleType + "'");
 
             while (dr.Read())
             {
-                if (!Prototypes.TryGetValue((int)dr[5], out Prototype prototype))
+                if (!Prototypes.TryGetValue((int)dr[7], out Prototype prototype))
                 {
                     prototype = new Prototype()
                     {
-                        Id = (int)dr[5],
-                        Name = dr[6].ToString(),
+                        Id = (int)dr[7],
+                        Name = dr[8].ToString(),
+                        Weight = dr[9].ParseToInt(),
+                        Speed = dr[10].ParseToShort(),
+                        TractiveEffort = dr[11].ParseToShort(),
+                        Power = dr[12].ParseToShort(),
                     };
                     Prototypes.Add(prototype.Id, prototype);
                 }
 
-                if (dr[2] == DBNull.Value)
+                if (dr[3] == DBNull.Value)
                 {
                     continue;
                 }
 
-                if (!Models.TryGetValue((int)dr[2], out Model model))
+                if (!Models.TryGetValue((int)dr[3], out Model model))
                 {
                     model = new Model()
                     {
-                        Id = (int)dr[2],
-                        Name = dr[3].ToString(),
-                        Manufacturer = dr[7].ToString(),
-                        ItemCode = dr[4].ToString(),
+                        Id = (int)dr[3],
+                        Name = dr[4].ToString(),
+                        Manufacturer = dr[6].ToString(),
+                        ItemCode = dr[5].ToString(),
                         Prototype = prototype,
                     };
                     Models.Add(model.Id, model);
@@ -109,6 +113,7 @@ namespace Tklib.Db.Pgsql
                     {
                         Id = (int)dr[0],
                         Name = dr[1].ToString(),
+                        Dcc = dr[2].ParseToShort(),
                         Model = model,
                     });
                 }
