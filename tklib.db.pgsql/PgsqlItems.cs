@@ -147,19 +147,45 @@ namespace Tklib.Db.Pgsql
         /// <inheritdoc/>
         public override void Update(Item item)
         {
-            throw new NotImplementedException();
+            // TODO
         }
 
         /// <inheritdoc/>
         public override void Update(Model model)
         {
-            throw new NotImplementedException();
+           if (model.Id == 0)
+            {
+                throw new ArgumentException("Only models with an id can be updated!");
+            }
+
+           var query =
+ $@"UPDATE model_item
+SET name = {model.Name},
+itemcode = {model.ItemCode},
+proto_class = {model.Prototype.Id}
+WHERE id={model.Id}";
+
+           _ = pgDatabase.ExecuteQueryAsync(query);
         }
 
         /// <inheritdoc/>
         public override void Update(Prototype prototype)
         {
-            throw new NotImplementedException();
+            if (prototype.Id == 0)
+            {
+                throw new ArgumentException("Only prototypes with an id can be updated!");
+            }
+
+            var query =
+$@"UPDATE proto_class
+SET name = {prototype.Name},
+proto_speed = {prototype.Speed},
+proto_weight = {prototype.Weight},
+engine_tractive_effort = {prototype.TractiveEffort},
+engine_power = {prototype.Power}
+WHERE id = {prototype.Id}
+";
+            _ = pgDatabase.ExecuteQueryAsync(query);
         }
     }
 }
