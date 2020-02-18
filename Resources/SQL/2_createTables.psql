@@ -1,6 +1,20 @@
 -- Author: nic547
-create type tk_vehicle_type as enum ('wagon', 'locomotive', 'multipleunit');
-CREATE TYPE epoch AS ENUM ('i', 'ii', 'iii', 'iv', 'v', 'vi');
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'tk_vehicle_type') THEN
+        create type tk_vehicle_type AS ENUM ('wagon', 'locomotive', 'multipleunit');
+    END IF;
+END
+$$;
+
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'epoch') THEN
+        create type epoch AS ENUM ('i', 'ii', 'iii', 'iv', 'v', 'vi');
+    END IF;
+END
+$$;
 
 ----------------------------
 --Lookup Tables
