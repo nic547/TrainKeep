@@ -11,7 +11,7 @@ namespace Tklib
     /// <summary>
     /// Represents the real deal.
     /// </summary>
-    public class Prototype
+    public class Prototype : IEquatable<Prototype>
     {
         /// <summary>
         /// Gets or sets the database id of the object.
@@ -45,5 +45,59 @@ namespace Tklib
 
         /// <inheritdoc/>
         public override string ToString() => Name ?? string.Empty;
+
+        /// <inheritdoc/>
+        public bool Equals(Prototype prototype)
+        {
+            bool result =
+                Id == prototype.Id &&
+                Name == prototype.Name &&
+                Weight == prototype.Weight &&
+                Speed == prototype.Speed &&
+                TractiveEffort == prototype.TractiveEffort &&
+                Power == prototype.Power;
+            return result;
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+            return (Id, Name, Weight, Speed, TractiveEffort, Power).GetHashCode();
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Prototype prototype))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(prototype);
+            }
+        }
+
+        /// <summary>
+        /// Creates a deep copy of this prototype.
+        /// </summary>
+        /// <returns>The <see cref="Prototype"/>.</returns>
+        public Prototype Clone()
+        {
+            return new Prototype()
+            {
+                Id = Id,
+                Name = Name,
+                Weight = Weight,
+                Speed = Speed,
+                Power = Power,
+                TractiveEffort = TractiveEffort,
+            };
+        }
     }
 }
