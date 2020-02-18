@@ -99,5 +99,19 @@ namespace Tklib
                 TractiveEffort = TractiveEffort,
             };
         }
+
+        /// <summary>
+        /// Sets all values to those given by the <see cref="Prototype"/>.
+        /// </summary>
+        /// <param name="prototype">The prototype containing the wanted values.</param>
+        public void SetValuesTo(Prototype prototype)
+        {
+            Id = prototype.Id;
+            Name = prototype.Name;
+            Weight = prototype.Weight;
+            Speed = prototype.Speed;
+            Power = prototype.Power;
+            TractiveEffort = prototype.TractiveEffort;
+        }
     }
 }

@@ -146,5 +146,26 @@ namespace TkLib.Model.Tests
             Assert.That(copy.Equals(proto1));
             Assert.That(!ReferenceEquals(copy, proto1));
         }
+
+        /// <summary>
+        /// Tests the SetValuesTo() functionality.
+        /// </summary>
+        [Test]
+        public void SetValuesToTest()
+        {
+            var proto1 = new Prototype()
+            {
+                Id = 257,
+                Name = "Traxx F140 AC3",
+            };
+
+            var proto2 = proto1.Clone();
+            proto2.Power = 5600;
+            proto2.Speed = 140;
+
+            proto1.SetValuesTo(proto2);
+
+            Assert.That(proto1.Power == 5600 && proto1.Speed == 140);
+        }
     }
 }
