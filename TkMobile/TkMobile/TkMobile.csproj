@@ -52,7 +52,7 @@
     <ProjectReference Include="..\..\tklib.dbManager\Tklib.DbManager.csproj" />
     <ProjectReference Include="..\..\tklib.db\Tklib.Db.csproj" />
     <ProjectReference Include="..\..\Tklib.Util\Tklib.Util.csproj" />
-    <ProjectReference Include="..\..\tklib\Tklib.csproj" />
+    <ProjectReference Include="..\..\tklib\Tklib.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
