@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\tklib\Tklib.csproj" />
+    <ProjectReference Include="..\tklib\Tklib.Model.csproj" />
   </ItemGroup>
 
 </Project>
