@@ -3,10 +3,12 @@
 
 namespace Tklib
 {
+    using System;
+
     /// <summary>
     /// Represents a article produced by an manufacturer.
     /// </summary>
-    public class Model
+    public class Model : IEquatable<Model>
     {
         /// <summary>
         /// Gets or sets the Id of the model, given by the Database-System.
@@ -35,5 +37,69 @@ namespace Tklib
 
         /// <inheritdoc/>
         public override string ToString() => $"{Manufacturer} {ItemCode}: {Name}";
+
+        /// <inheritdoc/>
+        public bool Equals(Model model)
+        {
+            return
+                Id == model.Id &&
+                Name == model.Name &&
+                Manufacturer == model.Manufacturer &&
+                ItemCode == model.ItemCode &&
+                Prototype.Equals(model.Prototype);
+        }
+
+        /// <inheritdoc/>
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+
+            if (!(obj is Model model))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(model);
+            }
+        }
+
+        /// <inheritdoc/>
+        public override int GetHashCode()
+        {
+           return (Id, Name, Manufacturer, ItemCode, Prototype).GetHashCode();
+        }
+
+        /// <summary>
+        /// Creates a deep copy of this Model.
+        /// </summary>
+        /// <returns>A <see cref="Model"/>.</returns>
+        public Model Clone()
+        {
+            return new Model()
+            {
+                Id = Id,
+                Name = Name,
+                Manufacturer = Manufacturer,
+                ItemCode = ItemCode,
+                Prototype = Prototype.Clone(),
+            };
+        }
+
+        /// <summary>
+        /// Sets all values to those given by the <see cref="Model"/>.
+        /// </summary>
+        /// <param name="model">The model containing the wanted values.</param>
+        public void SetValuesTo(Model model)
+        {
+            Id = model.Id;
+            Name = model.Name;
+            Manufacturer = model.Manufacturer;
+            ItemCode = model.ItemCode;
+            Prototype.SetValuesTo(model.Prototype);
+        }
     }
 }
