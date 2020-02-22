@@ -3,6 +3,7 @@
 
 namespace Tklib.Db.Pgsql.Tests
 {
+    using System.Linq;
     using Npgsql;
     using NUnit.Framework;
     using Tklib.Db;
@@ -74,8 +75,20 @@ namespace Tklib.Db.Pgsql.Tests
         /// </summary>
         [Test]
         public void Test1()
+        {
+            var locoList = TestData.GetLocomotives();
+            foreach (var loco in locoList)
             {
-                Assert.Pass();
+                database.Locomotives.Save(loco);
+            }
+
+            database.Locomotives.Load();
+
+            var combinedList = locoList.Zip(database.Locomotives.Collection);
+            foreach (var (first, second) in combinedList)
+            {
+                Assert.That(first.Equals(second));
             }
         }
     }
+}

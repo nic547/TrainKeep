@@ -66,36 +66,18 @@ namespace Tklib.Db
         /// Insert a new Item into the Database.
         /// </summary>
         /// <param name="item">The <see cref="Item"/> to be inserted.</param>
-        public abstract void Insert(Item item);
+        public abstract void Save(Item item);
 
         /// <summary>
         /// Insert a new Model into the Database.
         /// </summary>
         /// <param name="model">The <see cref="Model"/> to be inserted.</param>
-        public abstract void Insert(Model model);
+        public abstract void Save(Model model);
 
         /// <summary>
         /// Insert a new Prototype into the Database.
         /// </summary>
         /// <param name="prototype">The <see cref="Prototype"/> to be inserted.</param>
-        public abstract void Insert(Prototype prototype);
-
-        /// <summary>
-        /// Update an existing item.
-        /// </summary>
-        /// <param name="item">The <see cref="Item"/> to be updated.</param>
-        public abstract void Update(Item item);
-
-        /// <summary>
-        /// Update an existing model.
-        /// </summary>
-        /// <param name="model">The <see cref="Model"/> to be updated.</param>
-        public abstract void Update(Model model);
-
-        /// <summary>
-        /// Update an existing prototype.
-        /// </summary>
-        /// <param name="prototype">The <see cref="Prototype"/> to be updated.</param>
-        public abstract void Update(Prototype prototype);
+        public abstract void Save(Prototype prototype);
     }
 }

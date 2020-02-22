@@ -21,19 +21,19 @@ namespace Tklib.Db.Sqlite
         }
 
         /// <inheritdoc/>
-        public override void Insert(Item item)
+        public override void Save(Item item)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public override void Insert(Model model)
+        public override void Save(Model model)
         {
             throw new NotImplementedException();
         }
 
         /// <inheritdoc/>
-        public override void Insert(Prototype prototype)
+        public override void Save(Prototype prototype)
         {
             throw new NotImplementedException();
         }
@@ -46,24 +46,6 @@ namespace Tklib.Db.Sqlite
 
         /// <inheritdoc/>
         public override Task LoadImage(Item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Item item)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Model model)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Prototype prototype)
         {
             throw new NotImplementedException();
         }
