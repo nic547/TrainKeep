@@ -81,7 +81,7 @@ namespace TkMobile.ItemPages
         {
             void Action(string result)
             {
-                Database.Locomotives.Insert(new Model() { Name = result, Prototype = (Prototype)ProtoPicker.SelectedItem });
+                Database.Locomotives.Save(new Model() { Name = result, Prototype = (Prototype)ProtoPicker.SelectedItem });
             }
 
             await Navigation.PushModalAsync(new PromptPage("Enter the name of the model", Action));
@@ -91,7 +91,7 @@ namespace TkMobile.ItemPages
         {
             void Action(string result)
             {
-                Database.Locomotives.Insert(new Prototype() { Name = result });
+                Database.Locomotives.Save(new Prototype() { Name = result });
             }
 
             await Navigation.PushModalAsync(new PromptPage("Enter the name of the prototype", Action));
@@ -114,17 +114,7 @@ namespace TkMobile.ItemPages
             item.Model.Prototype.TractiveEffort = ProtoTractiveEffortCell.Text.ParseToShort();
             item.Model.Prototype.Weight = ProtoWeightCell.Text.ParseToInt();
 
-            Database.Locomotives.Update(item.Model.Prototype);
-            Database.Locomotives.Update(item.Model);
-
-            if (item.Id == 0)
-            {
-                Database.Locomotives.Insert(item);
-            }
-            else
-            {
-                Database.Locomotives.Update(item);
-            }
+            Database.Locomotives.Save(item);
 
             Navigation.PopAsync();
         }

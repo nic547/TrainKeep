@@ -26,40 +26,87 @@ namespace Tklib.Db.Pgsql
         }
 
         /// <inheritdoc/>
-        public override async void Insert(Item item)
+        public override async void Save(Item item)
         {
-            var query = $"INSERT INTO item (name, model_item, notes, dcc)" +
-                $"VALUES ('{item.Name}',{item.Model.Id},'{item.Notes}',{item.Dcc})" +
-                $"RETURNING id";
-            var dr = await pgDatabase.ExecuteQueryAsync(query);
-            dr.Read();
-            item.Id = (int)dr[0];
-            Collection.Add(item);
+            Save(item.Model);
+
+            if (item.Id == 0)
+            {
+                var query = $"INSERT INTO item (name, model_item, notes, dcc)" +
+                    $"VALUES ('{item.Name}',{item.Model.Id},'{item.Notes}',{item.Dcc})" +
+                    $"RETURNING id";
+                var dr = await pgDatabase.ExecuteQueryAsync(query);
+                dr.Read();
+                item.Id = (int)dr[0];
+                Collection.Add(item);
+            }
+            else
+            {
+                var query = $"UPDATE item" +
+                    $"SET name = {item.Name}" +
+                    $"notes = {item.Notes}" +
+                    $"dcc = {item.Dcc}" +
+                    $"model_item = {item.Model.Id}" +
+                    $"WHERE id ={item.Id}";
+
+                _ = pgDatabase.ExecuteQueryAsync(query);
+            }
         }
 
         /// <inheritdoc/>
-        public override async void Insert(Model model)
+        public override async void Save(Model model)
         {
-            var query = $"INSERT INTO model_item (name, proto_class, item_code)" +
-                $"VALUES ('{model.Name}',{model.Prototype.Id},'{model.ItemCode}')" +
-                $"RETURNING id";
-            var dr = await pgDatabase.ExecuteQueryAsync(query);
-            dr.Read();
-            model.Id = (int)dr[0];
-            Models.Add(model.Id, model);
+            Save(model.Prototype);
+
+            if (model.Id == 0)
+            {
+                var query = $"INSERT INTO model_item (name, proto_class, item_code)" +
+                    $"VALUES ('{model.Name}',{model.Prototype.Id},'{model.ItemCode}')" +
+                    $"RETURNING id";
+                var dr = await pgDatabase.ExecuteQueryAsync(query);
+                dr.Read();
+                model.Id = (int)dr[0];
+                Models.Add(model.Id, model);
+            }
+            else
+            {
+                var query = $"UPDATE model_item" +
+                $"SET name = {model.Name}," +
+                $"itemcode = {model.ItemCode}," +
+                $"proto_class = {model.Prototype.Id}" +
+                $"WHERE id={model.Id}";
+
+                _ = pgDatabase.ExecuteQueryAsync(query);
+            }
         }
 
         /// <inheritdoc/>
-        public override async void Insert(Prototype prototype)
+        public override async void Save(Prototype prototype)
         {
-            var query = $"INSERT INTO proto_class (name, vehicle_type, proto_weight, proto_speed, engine_tractive_effort, engine_power)" +
-                $"VALUES ('{prototype.Name}', '{VehicleType}', {prototype.Weight}, {prototype.Speed}, {prototype.TractiveEffort}, {prototype.Power})" +
-                $"RETURNING id";
+            if (prototype.Id == 0)
+            {
+                var query = $"INSERT INTO proto_class (name, vehicle_type, proto_weight, proto_speed, engine_tractive_effort, engine_power)" +
+                    $"VALUES ('{prototype.Name}', '{VehicleType}', {prototype.Weight}, {prototype.Speed}, {prototype.TractiveEffort}, {prototype.Power})" +
+                    $"RETURNING id";
 
-            var dr = await pgDatabase.ExecuteQueryAsync(query);
-            dr.Read();
-            prototype.Id = (int)dr[0];
-            Prototypes.Add(prototype.Id, prototype);
+                var dr = await pgDatabase.ExecuteQueryAsync(query);
+                dr.Read();
+                prototype.Id = (int)dr[0];
+                Prototypes.Add(prototype.Id, prototype);
+            }
+            else
+            {
+                var query =
+                    $"UPDATE proto_class" +
+                    $"SET name = {prototype.Name}," +
+                    $"proto_speed = {prototype.Speed}," +
+                    $"proto_weight = {prototype.Weight}," +
+                    $"engine_tractive_effort = {prototype.TractiveEffort}," +
+                    $"engine_power = {prototype.Power}" +
+                    $"WHERE id = {prototype.Id}";
+
+                _ = pgDatabase.ExecuteQueryAsync(query);
+            }
         }
 
         /// <inheritdoc/>
@@ -142,50 +189,6 @@ namespace Tklib.Db.Pgsql
             catch
             {
             }
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Item item)
-        {
-            // TODO
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Model model)
-        {
-           if (model.Id == 0)
-            {
-                throw new ArgumentException("Only models with an id can be updated!");
-            }
-
-           var query =
- $@"UPDATE model_item
-SET name = {model.Name},
-itemcode = {model.ItemCode},
-proto_class = {model.Prototype.Id}
-WHERE id={model.Id}";
-
-           _ = pgDatabase.ExecuteQueryAsync(query);
-        }
-
-        /// <inheritdoc/>
-        public override void Update(Prototype prototype)
-        {
-            if (prototype.Id == 0)
-            {
-                throw new ArgumentException("Only prototypes with an id can be updated!");
-            }
-
-            var query =
-$@"UPDATE proto_class
-SET name = {prototype.Name},
-proto_speed = {prototype.Speed},
-proto_weight = {prototype.Weight},
-engine_tractive_effort = {prototype.TractiveEffort},
-engine_power = {prototype.Power}
-WHERE id = {prototype.Id}
-";
-            _ = pgDatabase.ExecuteQueryAsync(query);
         }
     }
 }

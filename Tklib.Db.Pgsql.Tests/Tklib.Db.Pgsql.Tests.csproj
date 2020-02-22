@@ -6,6 +6,11 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>bin\Debug\Tklib.Db.Pgsql.Tests.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <AdditionalFiles Include="..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
@@ -26,6 +31,7 @@
   <ItemGroup>
     <ProjectReference Include="..\tklib.db.pgsql\Tklib.Db.Pgsql.csproj" />
     <ProjectReference Include="..\tklib.db\Tklib.Db.csproj" />
+    <ProjectReference Include="..\tklib\Tklib.Model.csproj" />
   </ItemGroup>
 
   <ItemGroup>
