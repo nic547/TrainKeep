@@ -5,6 +5,7 @@ namespace Tklib.Db.Pgsql
 {
     using System;
     using System.Diagnostics;
+    using System.Linq;
     using System.Threading.Tasks;
     using Tklib;
     using Tklib.Util;
@@ -42,12 +43,14 @@ namespace Tklib.Db.Pgsql
             }
             else
             {
-                var query = $"UPDATE item" +
-                    $"SET name = {item.Name}" +
-                    $"notes = {item.Notes}" +
-                    $"dcc = {item.Dcc}" +
-                    $"model_item = {item.Model.Id}" +
+                var query = $"UPDATE item " +
+                    $"SET name = '{item.Name}' " +
+                    $"notes = '{item.Notes}' " +
+                    $"dcc = {item.Dcc} " +
+                    $"model_item = {item.Model.Id} " +
                     $"WHERE id ={item.Id}";
+
+                Collection.Where(x => x.Id == item.Id).Single().SetValuesTo(item);
 
                 _ = pgDatabase.ExecuteQueryAsync(query);
             }
@@ -70,10 +73,10 @@ namespace Tklib.Db.Pgsql
             }
             else
             {
-                var query = $"UPDATE model_item" +
-                $"SET name = {model.Name}," +
-                $"itemcode = {model.ItemCode}," +
-                $"proto_class = {model.Prototype.Id}" +
+                var query = $"UPDATE model_item " +
+                $"SET name = '{model.Name}', " +
+                $"item_code = '{model.ItemCode}', " +
+                $"proto_class = {model.Prototype.Id} " +
                 $"WHERE id={model.Id}";
 
                 _ = pgDatabase.ExecuteQueryAsync(query);
@@ -97,13 +100,13 @@ namespace Tklib.Db.Pgsql
             else
             {
                 var query =
-                    $"UPDATE proto_class" +
-                    $"SET name = {prototype.Name}," +
-                    $"proto_speed = {prototype.Speed}," +
-                    $"proto_weight = {prototype.Weight}," +
-                    $"engine_tractive_effort = {prototype.TractiveEffort}," +
-                    $"engine_power = {prototype.Power}" +
-                    $"WHERE id = {prototype.Id}";
+                    $"UPDATE proto_class " +
+                    $"SET name = '{prototype.Name}', " +
+                    $"proto_speed = {prototype.Speed}, " +
+                    $"proto_weight = {prototype.Weight}, " +
+                    $"engine_tractive_effort = {prototype.TractiveEffort}, " +
+                    $"engine_power = {prototype.Power} " +
+                    $"WHERE id = {prototype.Id} ";
 
                 _ = pgDatabase.ExecuteQueryAsync(query);
             }
