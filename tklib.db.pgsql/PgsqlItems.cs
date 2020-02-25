@@ -34,7 +34,7 @@ namespace Tklib.Db.Pgsql
             if (item.Id == 0)
             {
                 var query = $"INSERT INTO item (name, model_item, notes, dcc)" +
-                    $"VALUES ('{item.Name}',{item.Model.Id},'{item.Notes}',{item.Dcc})" +
+                    $"VALUES ('{item.Name}',{item.Model.Id},'{item.Notes}',{(item.Dcc != null ? item.Dcc.ToString() : "NULL")})" +
                     $"RETURNING id";
                 var dr = await pgDatabase.ExecuteQueryAsync(query);
                 dr.Read();
@@ -44,9 +44,9 @@ namespace Tklib.Db.Pgsql
             else
             {
                 var query = $"UPDATE item " +
-                    $"SET name = '{item.Name}' " +
-                    $"notes = '{item.Notes}' " +
-                    $"dcc = {item.Dcc} " +
+                    $"SET name = '{item.Name}', " +
+                    $"notes = '{item.Notes}', " +
+                    $"dcc = {item.Dcc}, " +
                     $"model_item = {item.Model.Id} " +
                     $"WHERE id ={item.Id}";
 
