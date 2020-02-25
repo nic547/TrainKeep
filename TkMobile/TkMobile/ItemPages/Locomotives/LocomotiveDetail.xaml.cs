@@ -11,7 +11,6 @@ namespace TkMobile.ItemPages
     using Tklib.DbManager;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
-    using static Tklib.Util.Parse;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -21,11 +20,11 @@ namespace TkMobile.ItemPages
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 #pragma warning restore SA1601 // Partial elements should be documented
     {
-        private Item item;
+        private Item itemCopy;
 
-        private Model model;
+        private Model modelCopy;
 
-        private Prototype prototype;
+        private Prototype prototypeCopy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocomotiveDetail"/> class.
@@ -33,15 +32,16 @@ namespace TkMobile.ItemPages
         /// <param name="item">The <see cref="Item"/> for which the detail page should be shown.</param>
         public LocomotiveDetail(Item item)
         {
-            this.item = item;
-            BindingContext = this.item;
-            model = item.Model;
-            prototype = item?.Model?.Prototype;
+            itemCopy = item.Clone();
+            modelCopy = itemCopy.Model;
+            prototypeCopy = modelCopy?.Prototype;
+
+            BindingContext = itemCopy;
 
             InitializeComponent();
 
-            ModelSection.BindingContext = model;
-            ProtoSection.BindingContext = prototype;
+            ModelSection.BindingContext = modelCopy;
+            ProtoSection.BindingContext = prototypeCopy;
 
             ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
         }
@@ -52,29 +52,29 @@ namespace TkMobile.ItemPages
         protected async override void OnAppearing()
         {
             ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
-            ProtoPicker.SelectedItem = item?.Model?.Prototype;
+            ProtoPicker.SelectedItem = itemCopy?.Model?.Prototype;
 
             UpdateModelSelector();
-            ModelPicker.SelectedItem = item?.Model;
+            ModelPicker.SelectedItem = itemCopy?.Model;
 
-            await Database.Locomotives.LoadImage(item);
+            await Database.Locomotives.LoadImage(itemCopy);
 
-            if (item.Image != null)
+            if (itemCopy.Image != null)
             {
-                ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(item.Image.ToArray()));
+                ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(itemCopy.Image.ToArray()));
             }
         }
 
         private void UpdateModelSelector()
         {
-            ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype == ProtoPicker.SelectedItem).ToList();
+            ModelPicker.ItemsSource = Database.Locomotives.Models.Values.Where(x => x.Prototype.Id == ((Prototype)ProtoPicker.SelectedItem)?.Id).ToList();
         }
 
         private void ProtoPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateModelSelector();
-            prototype = (Prototype)ProtoPicker.SelectedItem;
-            ProtoSection.BindingContext = prototype;
+            prototypeCopy = ((Prototype)ProtoPicker.SelectedItem)?.Clone();
+            ProtoSection.BindingContext = prototypeCopy;
         }
 
         private async void ToolbarNewModel_Clicked(object sender, EventArgs e)
@@ -99,22 +99,10 @@ namespace TkMobile.ItemPages
 
         private void SaveButton_Clicked(object sender, EventArgs e)
         {
-            item.Model = model;
-            item.Model.Prototype = prototype;
+            itemCopy.Model = modelCopy;
+            itemCopy.Model.Prototype = prototypeCopy;
 
-            item.Name = ItemNameCell.Text;
-            item.Dcc = ItemDccCell.Text.ParseToShort();
-            item.Notes = ItemNotesEditor.Text;
-
-            item.Model.Name = ModelItemCodeCell.Text;
-
-            item.Model.Prototype.Name = ProtoNameCell.Text;
-            item.Model.Prototype.Speed = ProtoSpeedCell.Text.ParseToShort();
-            item.Model.Prototype.Power = ProtoPowerCell.Text.ParseToShort();
-            item.Model.Prototype.TractiveEffort = ProtoTractiveEffortCell.Text.ParseToShort();
-            item.Model.Prototype.Weight = ProtoWeightCell.Text.ParseToInt();
-
-            Database.Locomotives.Save(item);
+            Database.Locomotives.Save(itemCopy);
 
             Navigation.PopAsync();
         }
@@ -126,8 +114,8 @@ namespace TkMobile.ItemPages
 
         private void ModelPicker_SelectedIndexChanged(object sender, EventArgs e)
         {
-            model = (Model)ModelPicker.SelectedItem;
-            ModelSection.BindingContext = model;
+            modelCopy = (Model)ModelPicker.SelectedItem;
+            ModelSection.BindingContext = modelCopy;
         }
     }
 }

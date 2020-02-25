@@ -19,7 +19,7 @@
                     <Image x:Name="ImageThing"/>
                     <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
                 </ViewCell>
-                <EntryCell x:Name="ItemNameCell" Text="{Binding Name}"/>
+                <EntryCell x:Name="ItemNameCell" Text="{Binding Name, Mode=TwoWay}"/>
                 <ViewCell>
                     <Picker x:Name="ProtoPicker" SelectedIndexChanged="ProtoPicker_SelectedIndexChanged"/>
                 </ViewCell>
@@ -28,25 +28,25 @@
                 </ViewCell>
             </TableSection>
             <TableSection x:Name="ItemSection"  Title="Item-specific">
-                <EntryCell Label="DCC address" Text="{Binding Dcc}" x:Name="ItemDccCell" Keyboard="Numeric"/>
+                <EntryCell Label="DCC address" Text="{Binding Dcc, Mode=TwoWay}" x:Name="ItemDccCell" Keyboard="Numeric"/>
                 <ViewCell>
                     <StackLayout>
                         <Label Text="Notes"/>
-                        <Editor x:Name="ItemNotesEditor" Text="{Binding Notes}" AutoSize="TextChanges" />
+                        <Editor x:Name="ItemNotesEditor" Text="{Binding Notes, Mode=TwoWay}" AutoSize="TextChanges" />
                     </StackLayout>
                 </ViewCell>
             </TableSection>
             <TableSection x:Name="ModelSection" Title="Model-specific">
-                <EntryCell Label="Model Name" Text="{Binding Name}" x:Name="ModelNameCell"/>
+                <EntryCell Label="Model Name" Text="{Binding Name, Mode=TwoWay}" x:Name="ModelNameCell"/>
                 <EntryCell Label="Manufacturer" IsEnabled="False" Text="{Binding Manufacturer}"/>
-                <EntryCell Label="Item code" Text="{Binding ItemCode}" x:Name="ModelItemCodeCell"/>
+                <EntryCell Label="Item code" Text="{Binding ItemCode, Mode=TwoWay}" x:Name="ModelItemCodeCell"/>
             </TableSection>
             <TableSection x:Name="ProtoSection" Title="Prototype-specific">
-                <EntryCell Label="Prototype name" Text="{Binding Name}" x:Name="ProtoNameCell"/>
-                <EntryCell Label="Speed" Text="{Binding Speed}" x:Name="ProtoSpeedCell"/>
-                <EntryCell Label="Power" Text="{Binding Power}" x:Name="ProtoPowerCell"/>
-                <EntryCell Label="Tractive Effort" Text="{Binding TractiveEffort}" x:Name="ProtoTractiveEffortCell"/>
-                <EntryCell Label="Weight" Text="{Binding Weight}" x:Name="ProtoWeightCell"/>
+                <EntryCell Label="Prototype name" Text="{Binding Name, Mode=TwoWay}" x:Name="ProtoNameCell"/>
+                <EntryCell Label="Speed" Text="{Binding Speed, Mode=TwoWay}" x:Name="ProtoSpeedCell"/>
+                <EntryCell Label="Power" Text="{Binding Power, Mode=TwoWay}" x:Name="ProtoPowerCell"/>
+                <EntryCell Label="Tractive Effort" Text="{Binding TractiveEffort, Mode=TwoWay}" x:Name="ProtoTractiveEffortCell"/>
+                <EntryCell Label="Weight" Text="{Binding Weight, Mode=TwoWay}" x:Name="ProtoWeightCell"/>
             </TableSection>
         </TableView>
         <StackLayout Orientation="Horizontal">
