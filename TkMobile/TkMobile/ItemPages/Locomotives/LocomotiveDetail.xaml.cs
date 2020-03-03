@@ -44,12 +44,16 @@ namespace TkMobile.ItemPages
             ProtoSection.BindingContext = prototypeCopy;
 
             ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
+
+            OnInitialisation();
         }
 
         private Database Database { get; } = DatabaseManager.GetDatabase();
 
-        /// <inheritdoc/>
-        protected async override void OnAppearing()
+        /// <summary>
+        /// Stuff that needs to happen after the Page has been initalized and can/should happen async.
+        /// </summary>
+        protected async void OnInitialisation()
         {
             ProtoPicker.ItemsSource = Database.Locomotives.Prototypes.Values.ToList();
             ProtoPicker.SelectedItem = itemCopy?.Model?.Prototype;
