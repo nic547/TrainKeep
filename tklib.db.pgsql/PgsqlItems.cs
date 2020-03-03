@@ -89,7 +89,11 @@ namespace Tklib.Db.Pgsql
             if (prototype.Id == 0)
             {
                 var query = $"INSERT INTO proto_class (name, vehicle_type, proto_weight, proto_speed, engine_tractive_effort, engine_power)" +
-                    $"VALUES ('{prototype.Name}', '{VehicleType}', {prototype.Weight}, {prototype.Speed}, {prototype.TractiveEffort}, {prototype.Power})" +
+                    $"VALUES ('{prototype.Name}', '{VehicleType}', " +
+                    $"{(prototype.Weight != null ? prototype.Weight.ToString() : "NULL")}, " +
+                    $"{(prototype.Speed != null ? prototype.Speed.ToString() : "NULL")}, " +
+                    $"{(prototype.TractiveEffort != null ? prototype.TractiveEffort.ToString() : "NULL")}, " +
+                    $"{(prototype.Power != null ? prototype.Power.ToString() : "NULL")})" +
                     $"RETURNING id";
 
                 var dr = await pgDatabase.ExecuteQueryAsync(query);
