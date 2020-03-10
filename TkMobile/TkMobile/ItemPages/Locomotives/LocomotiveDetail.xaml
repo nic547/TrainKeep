@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TkMobile"
              x:Class="TkMobile.ItemPages.LocomotiveDetail">
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -16,7 +17,7 @@
         <TableView Intent="Data" HasUnevenRows="True">
             <TableSection Title="General">
                 <ViewCell>
-                    <Image x:Name="ImageThing"/>
+                    <Image x:Name="ImageThing" Source="{local:ImageResource DefaultImage.jpg}"/>
                     <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
                 </ViewCell>
                 <EntryCell x:Name="ItemNameCell" Text="{Binding Name, Mode=TwoWay}"/>
