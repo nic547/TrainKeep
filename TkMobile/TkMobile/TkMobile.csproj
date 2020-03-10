@@ -26,15 +26,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="DefaultImage.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="DefaultImage.jpg" />
+    <EmbeddedResource Include="..\..\Resources\Images\DefaultImage.jpg" Link="DefaultImage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
