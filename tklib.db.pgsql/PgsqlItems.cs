@@ -4,6 +4,7 @@
 namespace Tklib.Db.Pgsql
 {
     using System;
+    using System.Data.Common;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
@@ -182,16 +183,32 @@ namespace Tklib.Db.Pgsql
         /// <inheritdoc/>
         public override async Task LoadImage(Item item)
         {
-            using var dataReader = await pgDatabase.ExecuteQueryAsync($"SELECT image FROM item WHERE id={item.Id};");
+            Task<DbDataReader> itemImageReaderTask = pgDatabase.ExecuteQueryAsync($"SELECT image FROM item WHERE id={item.Id};");
+            Task<DbDataReader> modelImageReaderTask = pgDatabase.ExecuteQueryAsync($"SELECT image FROM model_item WHERE id={item.Model.Id};");
+
+            using var itemImageReader = await itemImageReaderTask;
             try
             {
-                await dataReader.ReadAsync();
-                if (dataReader[0] == DBNull.Value)
+                await itemImageReader.ReadAsync();
+                if (itemImageReader[0] != DBNull.Value)
                 {
+                    item.Image = (byte[])itemImageReader[0];
                     return;
                 }
+            }
+            catch
+            {
+            }
 
-                item.Image = (byte[])dataReader[0];
+            using var modelImageReader = await modelImageReaderTask;
+
+            try
+            {
+                await modelImageReader.ReadAsync();
+                if (modelImageReader[0] != DBNull.Value)
+                {
+                    item.Image = (byte[])modelImageReader[0];
+                }
             }
             catch
             {
