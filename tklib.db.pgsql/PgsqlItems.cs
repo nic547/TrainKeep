@@ -28,9 +28,9 @@ namespace Tklib.Db.Pgsql
         }
 
         /// <inheritdoc/>
-        public override async void Save(Item item)
+        public override async Task Save(Item item)
         {
-            Save(item.Model);
+            await Save(item.Model);
 
             if (item.Id == 0)
             {
@@ -51,16 +51,15 @@ namespace Tklib.Db.Pgsql
                     $"model_item = {item.Model.Id} " +
                     $"WHERE id ={item.Id}";
 
-                Collection.Where(x => x.Id == item.Id).Single().SetValuesTo(item);
-
                 _ = pgDatabase.ExecuteQueryAsync(query);
+                Collection.Where(x => x.Id == item.Id).Single().SetValuesTo(item);
             }
         }
 
         /// <inheritdoc/>
-        public override async void Save(Model model)
+        public override async Task Save(Model model)
         {
-            Save(model.Prototype);
+            await Save(model.Prototype);
 
             if (model.Id == 0)
             {
@@ -81,11 +80,12 @@ namespace Tklib.Db.Pgsql
                 $"WHERE id={model.Id}";
 
                 _ = pgDatabase.ExecuteQueryAsync(query);
+                Models[model.Id].SetValuesTo(model);
             }
         }
 
         /// <inheritdoc/>
-        public override async void Save(Prototype prototype)
+        public override async Task Save(Prototype prototype)
         {
             if (prototype.Id == 0)
             {
@@ -114,6 +114,7 @@ namespace Tklib.Db.Pgsql
                     $"WHERE id = {prototype.Id} ";
 
                 _ = pgDatabase.ExecuteQueryAsync(query);
+                Prototypes[prototype.Id].SetValuesTo(prototype);
             }
         }
 
