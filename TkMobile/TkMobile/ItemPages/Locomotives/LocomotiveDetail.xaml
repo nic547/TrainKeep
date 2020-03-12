@@ -17,8 +17,10 @@
         <TableView Intent="Data" HasUnevenRows="True">
             <TableSection Title="General">
                 <ViewCell>
-                    <Image x:Name="ImageThing" Source="{local:ImageResource DefaultImage.jpg}"/>
-                    <!--<Label Text="Loading ..." AnchorY="0" AnchorX="0"/>-->
+                    <Grid>
+                        <Image x:Name="DefaultImage" HorizontalOptions="CenterAndExpand"/>
+                        <Image x:Name="ImageThing" Opacity="0" IsOpaque="True"/>
+                    </Grid>
                 </ViewCell>
                 <EntryCell x:Name="ItemNameCell" Text="{Binding Name, Mode=TwoWay}"/>
                 <ViewCell>
