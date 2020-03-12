@@ -4,12 +4,16 @@
 namespace Tklib
 {
     using System;
+    using System.ComponentModel;
 
     /// <summary>
     /// Base class, represents one existing Item.
     /// </summary>
-    public class Item : IEquatable<Item>
+    public class Item : IEquatable<Item>, INotifyPropertyChanged
     {
+        /// <inheritdoc/>
+        public event PropertyChangedEventHandler PropertyChanged;
+
         /// <summary>
         /// Gets or sets the id given to the Item by the Datbase-System.
         /// </summary>
@@ -62,6 +66,8 @@ namespace Tklib
         /// Gets or sets a jpg image of the Item.
         /// </summary>
         public byte[] Image { get; set; }
+
+        
 
         /// <inheritdoc/>
         public bool Equals(Item item)
@@ -124,6 +130,7 @@ namespace Tklib
             Notes = item.Notes;
             Dcc = item.Dcc;
             Model.SetValuesTo(item.Model);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(string.Empty));
         }
     }
 }

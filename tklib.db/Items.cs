@@ -66,18 +66,21 @@ namespace Tklib.Db
         /// Insert a new Item into the Database.
         /// </summary>
         /// <param name="item">The <see cref="Item"/> to be inserted.</param>
-        public abstract void Save(Item item);
+        /// /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public abstract Task Save(Item item);
 
         /// <summary>
         /// Insert a new Model into the Database.
         /// </summary>
         /// <param name="model">The <see cref="Model"/> to be inserted.</param>
-        public abstract void Save(Model model);
+        /// /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public abstract Task Save(Model model);
 
         /// <summary>
         /// Insert a new Prototype into the Database.
         /// </summary>
         /// <param name="prototype">The <see cref="Prototype"/> to be inserted.</param>
-        public abstract void Save(Prototype prototype);
+        /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
+        public abstract Task Save(Prototype prototype);
     }
 }
