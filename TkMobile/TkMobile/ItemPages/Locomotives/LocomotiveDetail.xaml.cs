@@ -40,10 +40,10 @@ namespace TkMobile.ItemPages
 
             InitializeComponent();
 
+            DefaultImage.Source = ImageSource.FromResource("TkMobile.DefaultImage.webp", this.GetType().Assembly);
+
             ModelSection.BindingContext = modelCopy;
             ProtoSection.BindingContext = prototypeCopy;
-
-            ImageThing.Source = ImageSource.FromResource("TkMobile.DefaultImage.jpg");
 
             OnInitialisation();
         }
@@ -66,6 +66,8 @@ namespace TkMobile.ItemPages
             if (itemCopy.Image != null)
             {
                 ImageThing.Source = ImageSource.FromStream(() => new MemoryStream(itemCopy.Image.ToArray()));
+                _ = ImageThing.FadeTo(1);
+                _ = DefaultImage.FadeTo(0);
             }
         }
 
